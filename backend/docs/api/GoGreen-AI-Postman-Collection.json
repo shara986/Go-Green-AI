@@ -1,0 +1,1041 @@
+{
+  "info": {
+    "name": "GoGreen AI API",
+    "description": "Complete Postman collection for the GoGreen AI Spring Boot backend. Only includes APIs that exist in the project (Authentication, User profile, and Admin). All Admin endpoints require a Bearer JWT with the ADMIN role. Import the companion environment 'GoGreen AI - Local' and run the login requests first to populate token variables.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "description": "Registration, login, token refresh, logout, password reset, and email verification flows. Successful logins store the access token into the corresponding environment variable.",
+      "item": [
+        {
+          "name": "Register Customer",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"name\": \"Asha Kumar\",\n  \"username\": \"ashakumar\",\n  \"email\": \"asha@example.com\",\n  \"password\": \"Password123!\",\n  \"confirmPassword\": \"Password123!\",\n  \"phoneNumber\": \"9876543210\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/register/customer", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register", "customer"]},
+            "description": "Creates a new customer account and returns JWT access/refresh tokens.\n\nAuth: none\nBody: name, username, email, password, confirmPassword, phoneNumber (optional)\nResponses: 201 Created | 400 Bad Request (duplicate email/username or validation)\n\nTest: verifies 201 and stores accessToken into customerToken."
+          },
+          "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+            "pm.test(\"Status is 201 Created\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"Store customer token\", function () {",
+            "  var json = pm.response.json();",
+            "  if (json.data && json.data.accessToken) { pm.environment.set('customerToken', json.data.accessToken); }",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "Register Nursery Owner",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"name\": \"Green Valley Nursery\",\n  \"username\": \"greenvalley\",\n  \"email\": \"owner@greenvalley.com\",\n  \"password\": \"Password123!\",\n  \"confirmPassword\": \"Password123!\",\n  \"phoneNumber\": \"9876501234\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/register/nursery", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register", "nursery"]},
+            "description": "Submits a nursery owner registration for admin approval.\n\nAuth: none\nBody: name, username, email, password, confirmPassword, phoneNumber (optional)\nResponses: 201 Created | 400 Bad Request"
+          },
+          "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+            "pm.test(\"Status is 201 Created\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"Store nursery owner token\", function () {",
+            "  var json = pm.response.json();",
+            "  if (json.data && json.data.accessToken) { pm.environment.set('nurseryOwnerToken', json.data.accessToken); }",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "Register Gardening Expert",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"name\": \"Dr. Ravi Sharma\",\n  \"username\": \"ravisharma\",\n  \"email\": \"ravi.expert@example.com\",\n  \"password\": \"Password123!\",\n  \"confirmPassword\": \"Password123!\",\n  \"phoneNumber\": \"9876512345\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/register/expert", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register", "expert"]},
+            "description": "Submits a gardening expert registration for admin approval.\n\nAuth: none\nBody: name, username, email, password, confirmPassword, phoneNumber (optional)\nResponses: 201 Created | 400 Bad Request"
+          },
+          "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+            "pm.test(\"Status is 201 Created\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"Store expert token\", function () {",
+            "  var json = pm.response.json();",
+            "  if (json.data && json.data.accessToken) { pm.environment.set('expertToken', json.data.accessToken); }",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "Register Delivery Partner",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"name\": \"Quick Green Delivery\",\n  \"username\": \"quickdelivery\",\n  \"email\": \"delivery@quickgreen.com\",\n  \"password\": \"Password123!\",\n  \"confirmPassword\": \"Password123!\",\n  \"phoneNumber\": \"9876523456\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/register/delivery", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register", "delivery"]},
+            "description": "Submits a delivery partner registration for admin approval.\n\nAuth: none\nBody: name, username, email, password, confirmPassword, phoneNumber (optional)\nResponses: 201 Created | 400 Bad Request"
+          },
+          "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+            "pm.test(\"Status is 201 Created\", function () { pm.response.to.have.status(201); });",
+            "pm.test(\"Store delivery partner token\", function () {",
+            "  var json = pm.response.json();",
+            "  if (json.data && json.data.accessToken) { pm.environment.set('deliveryPartnerToken', json.data.accessToken); }",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "Login (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"usernameOrEmail\": \"admin\",\n  \"password\": \"Admin@123\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"]},
+            "description": "Authenticates an admin user and returns JWT access/refresh tokens.\n\nAuth: none\nBody: usernameOrEmail, password\nResponses: 200 OK | 401 Unauthorized (bad credentials)\n\nTest: verifies accessToken and stores into adminToken."
+          },
+          "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+            "pm.test(\"Status is 200 OK\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"Response has accessToken\", function () { pm.expect(pm.response.json().data.accessToken).to.exist; });",
+            "pm.test(\"Store admin token\", function () {",
+            "  var json = pm.response.json();",
+            "  if (json.data && json.data.accessToken) { pm.environment.set('adminToken', json.data.accessToken); }",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "Login (Customer)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"usernameOrEmail\": \"ashakumar\",\n  \"password\": \"Password123!\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"]},
+            "description": "Authenticates a customer and returns JWT tokens.\n\nAuth: none\nBody: usernameOrEmail, password\nResponses: 200 OK | 401 Unauthorized\n\nTest: stores accessToken into customerToken."
+          },
+          "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+            "pm.test(\"Status is 200 OK\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"Store customer token\", function () {",
+            "  var json = pm.response.json();",
+            "  if (json.data && json.data.accessToken) { pm.environment.set('customerToken', json.data.accessToken); }",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "Login (Nursery Owner)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"usernameOrEmail\": \"greenvalley\",\n  \"password\": \"Password123!\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"]},
+            "description": "Authenticates a nursery owner and returns JWT tokens.\n\nTest: stores accessToken into nurseryOwnerToken."
+          },
+          "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+            "pm.test(\"Status is 200 OK\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"Store nursery owner token\", function () {",
+            "  var json = pm.response.json();",
+            "  if (json.data && json.data.accessToken) { pm.environment.set('nurseryOwnerToken', json.data.accessToken); }",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "Login (Expert)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"usernameOrEmail\": \"ravisharma\",\n  \"password\": \"Password123!\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"]},
+            "description": "Authenticates a gardening expert and returns JWT tokens.\n\nTest: stores accessToken into expertToken."
+          },
+          "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+            "pm.test(\"Status is 200 OK\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"Store expert token\", function () {",
+            "  var json = pm.response.json();",
+            "  if (json.data && json.data.accessToken) { pm.environment.set('expertToken', json.data.accessToken); }",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "Login (Delivery Partner)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"usernameOrEmail\": \"quickdelivery\",\n  \"password\": \"Password123!\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"]},
+            "description": "Authenticates a delivery partner and returns JWT tokens.\n\nTest: stores accessToken into deliveryPartnerToken."
+          },
+          "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+            "pm.test(\"Status is 200 OK\", function () { pm.response.to.have.status(200); });",
+            "pm.test(\"Store delivery partner token\", function () {",
+            "  var json = pm.response.json();",
+            "  if (json.data && json.data.accessToken) { pm.environment.set('deliveryPartnerToken', json.data.accessToken); }",
+            "});"
+          ]}}]
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"refreshToken\": \"<refresh-token>\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/refresh-token", "host": ["{{baseUrl}}"], "path": ["api", "auth", "refresh-token"]},
+            "description": "Issues a new access token using a valid refresh token.\n\nAuth: none\nBody: refreshToken\nResponses: 200 OK | 401 Unauthorized (invalid/expired)"
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{customerToken}}"}],
+            "url": {"raw": "{{baseUrl}}/api/auth/logout", "host": ["{{baseUrl}}"], "path": ["api", "auth", "logout"]},
+            "description": "Logs out the authenticated user.\n\nAuth: Bearer token (any role)\nResponses: 200 OK | 401 Unauthorized"
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"email\": \"asha@example.com\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/forgot-password", "host": ["{{baseUrl}}"], "path": ["api", "auth", "forgot-password"]},
+            "description": "Initiates a password reset for the given email.\n\nAuth: none\nBody: email\nResponses: 200 OK | 400 Bad Request"
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"token\": \"<reset-token>\",\n  \"newPassword\": \"NewPassword123!\",\n  \"confirmPassword\": \"NewPassword123!\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/reset-password", "host": ["{{baseUrl}}"], "path": ["api", "auth", "reset-password"]},
+            "description": "Resets the password using a reset token.\n\nAuth: none\nBody: token, newPassword, confirmPassword (must match)\nResponses: 200 OK | 400 Bad Request"
+          }
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Authorization", "value": "Bearer {{customerToken}}"}
+            ],
+            "body": {"mode": "raw", "raw": "{\n  \"currentPassword\": \"Password123!\",\n  \"newPassword\": \"NewPassword123!\",\n  \"confirmPassword\": \"NewPassword123!\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/change-password", "host": ["{{baseUrl}}"], "path": ["api", "auth", "change-password"]},
+            "description": "Changes the authenticated user's password.\n\nAuth: Bearer token (any role)\nBody: currentPassword, newPassword, confirmPassword (must match)\nResponses: 200 OK | 400 Bad Request"
+          }
+        },
+        {
+          "name": "Verify Email",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"email\": \"asha@example.com\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/verify-email", "host": ["{{baseUrl}}"], "path": ["api", "auth", "verify-email"]},
+            "description": "Requests email verification for the given email.\n\nAuth: none\nBody: email\nResponses: 200 OK | 400 Bad Request"
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"email\": \"asha@example.com\",\n  \"otp\": \"123456\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/verify-otp", "host": ["{{baseUrl}}"], "path": ["api", "auth", "verify-otp"]},
+            "description": "Verifies an OTP for the given email.\n\nAuth: none\nBody: email, otp\nResponses: 200 OK | 400 Bad Request"
+          }
+        },
+        {
+          "name": "Login - Invalid Credentials (Negative)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"usernameOrEmail\": \"nonexistent@example.com\",\n  \"password\": \"WrongPassword1\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "login"]},
+            "description": "Negative test: authenticating with invalid credentials.\n\nExpected: 401 Unauthorized"
+          },
+          "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+            "pm.test(\"Status is 401 for invalid login\", function () { pm.response.to.have.status(401); });"
+          ]}}]
+        },
+        {
+          "name": "Register Customer - Duplicate Email (Negative)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"name\": \"Another User\",\n  \"username\": \"anotheruser\",\n  \"email\": \"asha@example.com\",\n  \"password\": \"Password123!\",\n  \"confirmPassword\": \"Password123!\",\n  \"phoneNumber\": \"9000000000\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/register/customer", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register", "customer"]},
+            "description": "Negative test: registering with an already-used email.\n\nExpected: 400 Bad Request (duplicate email)"
+          },
+          "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+            "pm.test(\"Status is 400 for duplicate email\", function () { pm.response.to.have.status(400); });"
+          ]}}]
+        },
+        {
+          "name": "Register Customer - Missing Required Fields (Negative)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"name\": \"\",\n  \"username\": \"\",\n  \"email\": \"not-an-email\",\n  \"password\": \"123\",\n  \"confirmPassword\": \"456\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/auth/register/customer", "host": ["{{baseUrl}}"], "path": ["api", "auth", "register", "customer"]},
+            "description": "Negative test: registration with missing/invalid required fields.\n\nExpected: 400 Bad Request (validation error)"
+          },
+          "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+            "pm.test(\"Status is 400 for validation errors\", function () { pm.response.to.have.status(400); });"
+          ]}}]
+        }
+      ]
+    },
+    {
+      "name": "Customer",
+      "description": "User profile endpoints for any authenticated user.",
+      "item": [
+        {
+          "name": "Get Current User Profile",
+          "request": {
+            "method": "GET",
+            "header": [{"key": "Authorization", "value": "Bearer {{customerToken}}"}],
+            "url": {"raw": "{{baseUrl}}/api/users/me", "host": ["{{baseUrl}}"], "path": ["api", "users", "me"]},
+            "description": "Returns the profile of the currently authenticated user.\n\nAuth: Bearer token (any role)\nResponses: 200 OK | 401 Unauthorized"
+          },
+          "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+            "pm.test(\"Status is 200 OK\", function () { pm.response.to.have.status(200); });"
+          ]}}]
+        },
+        {
+          "name": "Update Current User Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"},
+              {"key": "Authorization", "value": "Bearer {{customerToken}}"}
+            ],
+            "body": {"mode": "raw", "raw": "{\n  \"name\": \"Asha Kumar Updated\",\n  \"email\": \"asha@example.com\",\n  \"phoneNumber\": \"9876543210\"\n}"},
+            "url": {"raw": "{{baseUrl}}/api/users/me", "host": ["{{baseUrl}}"], "path": ["api", "users", "me"]},
+            "description": "Updates the profile of the currently authenticated user.\n\nAuth: Bearer token (any role)\nBody: name, email, phoneNumber (all optional)\nResponses: 200 OK | 400 Bad Request | 401 Unauthorized"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "description": "Administrative workflows protected by hasRole('ADMIN'). All requests use Authorization: Bearer {{adminToken}}.",
+      "item": [
+        {
+          "name": "Admin Dashboard",
+          "description": "Admin dashboard with counts for users, plants, orders, categories, revenue, and pending approvals.",
+          "item": [
+            {
+              "name": "Get Admin Dashboard",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/dashboard", "host": ["{{baseUrl}}"], "path": ["api", "admin", "dashboard"]},
+                "description": "Returns overall dashboard counts.\n\nAuth: ADMIN\nResponses: 200 OK | 401 Unauthorized | 403 Forbidden"
+              },
+              "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+                "pm.test(\"Status is 200 OK\", function () { pm.response.to.have.status(200); });",
+                "pm.test(\"Response has success field\", function () { pm.expect(pm.response.json()).to.have.property('success'); });"
+              ]}}]
+            }
+          ]
+        },
+        {
+          "name": "User Management",
+          "description": "View, search, filter, activate, deactivate, and delete users.",
+          "item": [
+            {
+              "name": "List Users",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/users?search=&role=ROLE_CUSTOMER&approvalStatus=APPROVED&enabled=true&page=0&size=20&sortBy=createdAt&sortDir=desc", "host": ["{{baseUrl}}"], "path": ["api", "admin", "users"], "query": [
+                  {"key": "search", "value": "", "description": "Search term (name/email/username)"},
+                  {"key": "role", "value": "ROLE_CUSTOMER", "description": "ROLE_ADMIN, ROLE_CUSTOMER, ROLE_NURSERY_OWNER, ROLE_GARDENING_EXPERT, ROLE_DELIVERY_PARTNER"},
+                  {"key": "approvalStatus", "value": "APPROVED", "description": "PENDING_APPROVAL, APPROVED, REJECTED, SUSPENDED, INACTIVE"},
+                  {"key": "enabled", "value": "true"},
+                  {"key": "page", "value": "0"},
+                  {"key": "size", "value": "20"},
+                  {"key": "sortBy", "value": "createdAt"},
+                  {"key": "sortDir", "value": "desc"}
+                ]},
+                "description": "Returns a paginated list of users with optional search, role, approval status, and enabled filters.\n\nAuth: ADMIN\nQuery: search, role, approvalStatus, enabled, page, size, sortBy, sortDir\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Get User By ID",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/users/{{userId}}", "host": ["{{baseUrl}}"], "path": ["api", "admin", "users", "{{userId}}"]},
+                "description": "Returns detailed information about a single user.\n\nAuth: ADMIN\nPath: userId\nResponses: 200 OK | 404 Not Found | 401/403"
+              }
+            },
+            {
+              "name": "Activate User",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/users/{{userId}}/activate", "host": ["{{baseUrl}}"], "path": ["api", "admin", "users", "{{userId}}", "activate"]},
+                "description": "Re-enables and approves a deactivated user.\n\nAuth: ADMIN\nPath: userId\nResponses: 200 OK | 404 | 401/403"
+              }
+            },
+            {
+              "name": "Deactivate User",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/users/{{userId}}/deactivate", "host": ["{{baseUrl}}"], "path": ["api", "admin", "users", "{{userId}}", "deactivate"]},
+                "description": "Disables a user account.\n\nAuth: ADMIN\nPath: userId\nResponses: 200 OK | 404 | 401/403"
+              }
+            },
+            {
+              "name": "Soft Delete User",
+              "request": {
+                "method": "DELETE",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/users/{{userId}}", "host": ["{{baseUrl}}"], "path": ["api", "admin", "users", "{{userId}}"]},
+                "description": "Soft-deletes a user account.\n\nAuth: ADMIN\nPath: userId\nResponses: 200 OK | 404 | 401/403"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Nursery Approval",
+          "description": "View, approve, reject, suspend, and activate nurseries.",
+          "item": [
+            {
+              "name": "List Pending Nurseries",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/nurseries/pending?page=0&size=20", "host": ["{{baseUrl}}"], "path": ["api", "admin", "nurseries", "pending"], "query": [{"key": "page", "value": "0"}, {"key": "size", "value": "20"}]},
+                "description": "Returns nurseries awaiting admin approval.\n\nAuth: ADMIN\nQuery: page, size\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Get Nursery By ID",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/nurseries/{{nurseryId}}", "host": ["{{baseUrl}}"], "path": ["api", "admin", "nurseries", "{{nurseryId}}"]},
+                "description": "Returns detailed information about a nursery.\n\nAuth: ADMIN\nPath: nurseryId\nResponses: 200 OK | 404 | 401/403"
+              }
+            },
+            {
+              "name": "Approve Nursery",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/nurseries/{{nurseryId}}/approve", "host": ["{{baseUrl}}"], "path": ["api", "admin", "nurseries", "{{nurseryId}}", "approve"]},
+                "description": "Approves a pending nursery registration.\n\nAuth: ADMIN\nPath: nurseryId\nResponses: 200 OK | 404 | 400 (invalid status) | 401/403"
+              }
+            },
+            {
+              "name": "Reject Nursery",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/nurseries/{{nurseryId}}/reject?reason=Insufficient%20documentation", "host": ["{{baseUrl}}"], "path": ["api", "admin", "nurseries", "{{nurseryId}}", "reject"], "query": [{"key": "reason", "value": "Insufficient documentation"}]},
+                "description": "Rejects a pending nursery, optionally with a reason.\n\nAuth: ADMIN\nPath: nurseryId\nQuery: reason (optional)\nResponses: 200 OK | 404 | 400 | 401/403"
+              }
+            },
+            {
+              "name": "Suspend Nursery",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/nurseries/{{nurseryId}}/suspend", "host": ["{{baseUrl}}"], "path": ["api", "admin", "nurseries", "{{nurseryId}}", "suspend"]},
+                "description": "Suspends an approved nursery.\n\nAuth: ADMIN\nPath: nurseryId\nResponses: 200 OK | 404 | 400 | 401/403"
+              }
+            },
+            {
+              "name": "Activate Nursery",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/nurseries/{{nurseryId}}/activate", "host": ["{{baseUrl}}"], "path": ["api", "admin", "nurseries", "{{nurseryId}}", "activate"]},
+                "description": "Reactivates a suspended or rejected nursery.\n\nAuth: ADMIN\nPath: nurseryId\nResponses: 200 OK | 404 | 400 | 401/403"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Expert Approval",
+          "description": "View, approve, reject, suspend, and activate gardening experts.",
+          "item": [
+            {
+              "name": "List Pending Experts",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/experts/pending?page=0&size=20", "host": ["{{baseUrl}}"], "path": ["api", "admin", "experts", "pending"], "query": [{"key": "page", "value": "0"}, {"key": "size", "value": "20"}]},
+                "description": "Returns gardening experts awaiting admin approval.\n\nAuth: ADMIN\nQuery: page, size\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Get Expert By ID",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/experts/{{expertId}}", "host": ["{{baseUrl}}"], "path": ["api", "admin", "experts", "{{expertId}}"]},
+                "description": "Returns detailed information about a gardening expert.\n\nAuth: ADMIN\nPath: expertId\nResponses: 200 OK | 404 | 401/403"
+              }
+            },
+            {
+              "name": "Approve Expert",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/experts/{{expertId}}/approve", "host": ["{{baseUrl}}"], "path": ["api", "admin", "experts", "{{expertId}}", "approve"]},
+                "description": "Approves a pending gardening expert.\n\nAuth: ADMIN\nPath: expertId\nResponses: 200 OK | 404 | 400 | 401/403"
+              }
+            },
+            {
+              "name": "Reject Expert",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/experts/{{expertId}}/reject?reason=Missing%20credentials", "host": ["{{baseUrl}}"], "path": ["api", "admin", "experts", "{{expertId}}", "reject"], "query": [{"key": "reason", "value": "Missing credentials"}]},
+                "description": "Rejects a pending expert, optionally with a reason.\n\nAuth: ADMIN\nPath: expertId\nQuery: reason (optional)\nResponses: 200 OK | 404 | 400 | 401/403"
+              }
+            },
+            {
+              "name": "Suspend Expert",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/experts/{{expertId}}/suspend", "host": ["{{baseUrl}}"], "path": ["api", "admin", "experts", "{{expertId}}", "suspend"]},
+                "description": "Suspends a gardening expert.\n\nAuth: ADMIN\nPath: expertId\nResponses: 200 OK | 404 | 400 | 401/403"
+              }
+            },
+            {
+              "name": "Activate Expert",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/experts/{{expertId}}/activate", "host": ["{{baseUrl}}"], "path": ["api", "admin", "experts", "{{expertId}}", "activate"]},
+                "description": "Reactivates a suspended or rejected expert.\n\nAuth: ADMIN\nPath: expertId\nResponses: 200 OK | 404 | 400 | 401/403"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Delivery Partner Management",
+          "description": "View, approve, suspend, and activate delivery partners.",
+          "item": [
+            {
+              "name": "List Delivery Partners",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/delivery-partners?page=0&size=20", "host": ["{{baseUrl}}"], "path": ["api", "admin", "delivery-partners"], "query": [{"key": "page", "value": "0"}, {"key": "size", "value": "20"}]},
+                "description": "Returns all delivery partners.\n\nAuth: ADMIN\nQuery: page, size\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Approve Delivery Partner",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/delivery-partners/{{deliveryPartnerId}}/approve", "host": ["{{baseUrl}}"], "path": ["api", "admin", "delivery-partners", "{{deliveryPartnerId}}", "approve"]},
+                "description": "Approves a delivery partner.\n\nAuth: ADMIN\nPath: deliveryPartnerId\nResponses: 200 OK | 404 | 400 | 401/403"
+              }
+            },
+            {
+              "name": "Suspend Delivery Partner",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/delivery-partners/{{deliveryPartnerId}}/suspend", "host": ["{{baseUrl}}"], "path": ["api", "admin", "delivery-partners", "{{deliveryPartnerId}}", "suspend"]},
+                "description": "Suspends a delivery partner.\n\nAuth: ADMIN\nPath: deliveryPartnerId\nResponses: 200 OK | 404 | 400 | 401/403"
+              }
+            },
+            {
+              "name": "Activate Delivery Partner",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/delivery-partners/{{deliveryPartnerId}}/activate", "host": ["{{baseUrl}}"], "path": ["api", "admin", "delivery-partners", "{{deliveryPartnerId}}", "activate"]},
+                "description": "Reactivates a suspended delivery partner.\n\nAuth: ADMIN\nPath: deliveryPartnerId\nResponses: 200 OK | 404 | 400 | 401/403"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Category Management",
+          "description": "Full CRUD for plant categories.",
+          "item": [
+            {
+              "name": "List Categories",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/categories?page=0&size=20", "host": ["{{baseUrl}}"], "path": ["api", "admin", "categories"], "query": [{"key": "page", "value": "0"}, {"key": "size", "value": "20"}]},
+                "description": "Returns all plant categories with pagination.\n\nAuth: ADMIN\nQuery: page, size\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Get Category By ID",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/categories/{{categoryId}}", "host": ["{{baseUrl}}"], "path": ["api", "admin", "categories", "{{categoryId}}"]},
+                "description": "Returns a single plant category.\n\nAuth: ADMIN\nPath: categoryId\nResponses: 200 OK | 404 | 401/403"
+              }
+            },
+            {
+              "name": "Create Category",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Content-Type", "value": "application/json"},
+                  {"key": "Authorization", "value": "Bearer {{adminToken}}"}
+                ],
+                "body": {"mode": "raw", "raw": "{\n  \"name\": \"Indoor Plants\",\n  \"description\": \"Plants suitable for indoor environments\",\n  \"icon\": \"leaf\",\n  \"active\": true\n}"},
+                "url": {"raw": "{{baseUrl}}/api/admin/categories", "host": ["{{baseUrl}}"], "path": ["api", "admin", "categories"]},
+                "description": "Creates a new plant category.\n\nAuth: ADMIN\nBody: name (required), description, icon, active\nResponses: 201 Created | 400 Bad Request (duplicate name/validation) | 401/403"
+              },
+              "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+                "pm.test(\"Status is 201 Created\", function () { pm.response.to.have.status(201); });"
+              ]}}]
+            },
+            {
+              "name": "Update Category",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {"key": "Content-Type", "value": "application/json"},
+                  {"key": "Authorization", "value": "Bearer {{adminToken}}"}
+                ],
+                "body": {"mode": "raw", "raw": "{\n  \"name\": \"Indoor Plants Deluxe\",\n  \"description\": \"Premium indoor plants\",\n  \"icon\": \"leaf\",\n  \"active\": true\n}"},
+                "url": {"raw": "{{baseUrl}}/api/admin/categories/{{categoryId}}", "host": ["{{baseUrl}}"], "path": ["api", "admin", "categories", "{{categoryId}}"]},
+                "description": "Updates an existing plant category.\n\nAuth: ADMIN\nPath: categoryId\nBody: name, description, icon, active\nResponses: 200 OK | 400 (duplicate) | 404 | 401/403"
+              }
+            },
+            {
+              "name": "Delete Category",
+              "request": {
+                "method": "DELETE",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/categories/{{categoryId}}", "host": ["{{baseUrl}}"], "path": ["api", "admin", "categories", "{{categoryId}}"]},
+                "description": "Soft-deletes a plant category.\n\nAuth: ADMIN\nPath: categoryId\nResponses: 200 OK | 404 | 401/403"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Plant Monitoring",
+          "description": "View, search, filter, disable, enable, and remove plant listings.",
+          "item": [
+            {
+              "name": "List Plants",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/plants?search=&active=true&page=0&size=20", "host": ["{{baseUrl}}"], "path": ["api", "admin", "plants"], "query": [{"key": "search", "value": ""}, {"key": "active", "value": "true"}, {"key": "page", "value": "0"}, {"key": "size", "value": "20"}]},
+                "description": "Returns all plant listings with optional search and active filter.\n\nAuth: ADMIN\nQuery: search, active, page, size\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Get Plant By ID",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/plants/{{plantId}}", "host": ["{{baseUrl}}"], "path": ["api", "admin", "plants", "{{plantId}}"]},
+                "description": "Returns detailed information about a plant listing.\n\nAuth: ADMIN\nPath: plantId\nResponses: 200 OK | 404 | 401/403"
+              }
+            },
+            {
+              "name": "Disable Plant Listing",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/plants/{{plantId}}/disable", "host": ["{{baseUrl}}"], "path": ["api", "admin", "plants", "{{plantId}}", "disable"]},
+                "description": "Disables a plant listing from the catalog.\n\nAuth: ADMIN\nPath: plantId\nResponses: 200 OK | 404 | 401/403"
+              }
+            },
+            {
+              "name": "Enable Plant Listing",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/plants/{{plantId}}/enable", "host": ["{{baseUrl}}"], "path": ["api", "admin", "plants", "{{plantId}}", "enable"]},
+                "description": "Re-enables a disabled plant listing.\n\nAuth: ADMIN\nPath: plantId\nResponses: 200 OK | 404 | 401/403"
+              }
+            },
+            {
+              "name": "Remove Inappropriate Plant",
+              "request": {
+                "method": "DELETE",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/plants/{{plantId}}", "host": ["{{baseUrl}}"], "path": ["api", "admin", "plants", "{{plantId}}"]},
+                "description": "Soft-deletes an inappropriate plant listing.\n\nAuth: ADMIN\nPath: plantId\nResponses: 200 OK | 404 | 401/403"
+              }
+            },
+            {
+              "name": "Plant Statistics",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/plants/statistics", "host": ["{{baseUrl}}"], "path": ["api", "admin", "plants", "statistics"]},
+                "description": "Returns aggregate statistics for plants.\n\nAuth: ADMIN\nResponses: 200 OK | 401/403"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Order Monitoring",
+          "description": "View, search, filter, and cancel orders.",
+          "item": [
+            {
+              "name": "List Orders",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/orders?search=&status=PENDING&page=0&size=20", "host": ["{{baseUrl}}"], "path": ["api", "admin", "orders"], "query": [{"key": "search", "value": ""}, {"key": "status", "value": "PENDING", "description": "PENDING, CONFIRMED, PROCESSING, SHIPPED, DELIVERED, CANCELLED, REFUNDED"}, {"key": "page", "value": "0"}, {"key": "size", "value": "20"}]},
+                "description": "Returns all platform orders with optional search and status filter.\n\nAuth: ADMIN\nQuery: search, status, page, size\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Get Order By ID",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/orders/{{orderId}}", "host": ["{{baseUrl}}"], "path": ["api", "admin", "orders", "{{orderId}}"]},
+                "description": "Returns detailed information about an order.\n\nAuth: ADMIN\nPath: orderId\nResponses: 200 OK | 404 | 401/403"
+              }
+            },
+            {
+              "name": "Cancel Order",
+              "request": {
+                "method": "PUT",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/orders/{{orderId}}/cancel", "host": ["{{baseUrl}}"], "path": ["api", "admin", "orders", "{{orderId}}", "cancel"]},
+                "description": "Cancels an order when permitted.\n\nAuth: ADMIN\nPath: orderId\nResponses: 200 OK | 404 | 400 (invalid transition) | 401/403"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Payment Monitoring",
+          "description": "View, search, filter, and calculate revenue.",
+          "item": [
+            {
+              "name": "List Payments",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/payments?search=&status=COMPLETED&page=0&size=20", "host": ["{{baseUrl}}"], "path": ["api", "admin", "payments"], "query": [{"key": "search", "value": ""}, {"key": "status", "value": "COMPLETED", "description": "PENDING, COMPLETED, FAILED, REFUNDED"}, {"key": "page", "value": "0"}, {"key": "size", "value": "20"}]},
+                "description": "Returns payment history with optional search and status filter.\n\nAuth: ADMIN\nQuery: search, status, page, size\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Get Payment By ID",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/payments/{{paymentId}}", "host": ["{{baseUrl}}"], "path": ["api", "admin", "payments", "{{paymentId}}"]},
+                "description": "Returns detailed information about a payment.\n\nAuth: ADMIN\nPath: paymentId\nResponses: 200 OK | 404 | 401/403"
+              }
+            },
+            {
+              "name": "Total Revenue",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/payments/revenue", "host": ["{{baseUrl}}"], "path": ["api", "admin", "payments", "revenue"]},
+                "description": "Returns total platform revenue.\n\nAuth: ADMIN\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Monthly Revenue Report",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/payments/monthly-revenue", "host": ["{{baseUrl}}"], "path": ["api", "admin", "payments", "monthly-revenue"]},
+                "description": "Returns the monthly revenue report.\n\nAuth: ADMIN\nResponses: 200 OK | 401/403"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Review & Feedback Management",
+          "description": "View, search, and delete reviews/feedback.",
+          "item": [
+            {
+              "name": "List Feedback",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/feedback?search=&page=0&size=20", "host": ["{{baseUrl}}"], "path": ["api", "admin", "feedback"], "query": [{"key": "search", "value": ""}, {"key": "page", "value": "0"}, {"key": "size", "value": "20"}]},
+                "description": "Returns customer feedback and reviews with optional search.\n\nAuth: ADMIN\nQuery: search, page, size\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Delete Abusive Review",
+              "request": {
+                "method": "DELETE",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/feedback/{{reviewId}}", "host": ["{{baseUrl}}"], "path": ["api", "admin", "feedback", "{{reviewId}}"]},
+                "description": "Removes an abusive or inappropriate review.\n\nAuth: ADMIN\nPath: reviewId\nResponses: 200 OK | 404 | 401/403"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Announcements",
+          "description": "Create, view, update, and delete platform announcements.",
+          "item": [
+            {
+              "name": "List Announcements",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/announcements", "host": ["{{baseUrl}}"], "path": ["api", "admin", "announcements"]},
+                "description": "Returns all platform announcements.\n\nAuth: ADMIN\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Get Announcement By ID",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/announcements/{{announcementId}}", "host": ["{{baseUrl}}"], "path": ["api", "admin", "announcements", "{{announcementId}}"]},
+                "description": "Returns a single announcement.\n\nAuth: ADMIN\nPath: announcementId\nResponses: 200 OK | 404 | 401/403"
+              }
+            },
+            {
+              "name": "Create Announcement",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Content-Type", "value": "application/json"},
+                  {"key": "Authorization", "value": "Bearer {{adminToken}}"}
+                ],
+                "body": {"mode": "raw", "raw": "{\n  \"title\": \"New Spring Sale\",\n  \"message\": \"Get 20% off all indoor plants this week!\",\n  \"active\": true\n}"},
+                "url": {"raw": "{{baseUrl}}/api/admin/announcements", "host": ["{{baseUrl}}"], "path": ["api", "admin", "announcements"]},
+                "description": "Creates a platform-wide announcement.\n\nAuth: ADMIN\nBody: title (required), message (required), active\nResponses: 201 Created | 400 (validation) | 401/403"
+              },
+              "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+                "pm.test(\"Status is 201 Created\", function () { pm.response.to.have.status(201); });"
+              ]}}]
+            },
+            {
+              "name": "Update Announcement",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {"key": "Content-Type", "value": "application/json"},
+                  {"key": "Authorization", "value": "Bearer {{adminToken}}"}
+                ],
+                "body": {"mode": "raw", "raw": "{\n  \"title\": \"New Spring Sale Extended\",\n  \"message\": \"Get 25% off all indoor plants this week!\",\n  \"active\": true\n}"},
+                "url": {"raw": "{{baseUrl}}/api/admin/announcements/{{announcementId}}", "host": ["{{baseUrl}}"], "path": ["api", "admin", "announcements", "{{announcementId}}"]},
+                "description": "Updates an existing announcement.\n\nAuth: ADMIN\nPath: announcementId\nBody: title, message, active\nResponses: 200 OK | 404 | 400 | 401/403"
+              }
+            },
+            {
+              "name": "Delete Announcement",
+              "request": {
+                "method": "DELETE",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/announcements/{{announcementId}}", "host": ["{{baseUrl}}"], "path": ["api", "admin", "announcements", "{{announcementId}}"]},
+                "description": "Deletes an announcement.\n\nAuth: ADMIN\nPath: announcementId\nResponses: 200 OK | 404 | 401/403"
+              }
+            },
+            {
+              "name": "Send Announcement Notification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Content-Type", "value": "application/json"},
+                  {"key": "Authorization", "value": "Bearer {{adminToken}}"}
+                ],
+                "body": {"mode": "raw", "raw": "{\n  \"title\": \"System Maintenance\",\n  \"message\": \"Scheduled maintenance on Sunday 2 AM.\"\n}"},
+                "url": {"raw": "{{baseUrl}}/api/admin/notifications/announcement", "host": ["{{baseUrl}}"], "path": ["api", "admin", "notifications", "announcement"]},
+                "description": "Sends an admin announcement notification.\n\nAuth: ADMIN\nBody: title (required), message (required)\nResponses: 200 OK | 400 | 401/403"
+              }
+            },
+            {
+              "name": "Send Promotional Notification",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Content-Type", "value": "application/json"},
+                  {"key": "Authorization", "value": "Bearer {{adminToken}}"}
+                ],
+                "body": {"mode": "raw", "raw": "{\n  \"title\": \"Weekend Discount\",\n  \"message\": \"Flat 15% off on all purchases this weekend.\"\n}"},
+                "url": {"raw": "{{baseUrl}}/api/admin/notifications/promotional", "host": ["{{baseUrl}}"], "path": ["api", "admin", "notifications", "promotional"]},
+                "description": "Sends a promotional notification.\n\nAuth: ADMIN\nBody: title, message\nResponses: 200 OK | 400 | 401/403"
+              }
+            },
+            {
+              "name": "Send Maintenance Notice",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Content-Type", "value": "application/json"},
+                  {"key": "Authorization", "value": "Bearer {{adminToken}}"}
+                ],
+                "body": {"mode": "raw", "raw": "{\n  \"title\": \"Maintenance Notice\",\n  \"message\": \"Service will be down tonight from 1 AM to 3 AM.\"\n}"},
+                "url": {"raw": "{{baseUrl}}/api/admin/notifications/maintenance", "host": ["{{baseUrl}}"], "path": ["api", "admin", "notifications", "maintenance"]},
+                "description": "Sends a maintenance notice.\n\nAuth: ADMIN\nBody: title, message\nResponses: 200 OK | 400 | 401/403"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Analytics",
+          "description": "Chart-ready analytics for the admin dashboard.",
+          "item": [
+            {
+              "name": "Monthly Sales",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/analytics/monthly-sales", "host": ["{{baseUrl}}"], "path": ["api", "admin", "analytics", "monthly-sales"]},
+                "description": "Returns monthly sales data for charts.\n\nAuth: ADMIN\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Top Selling Plants",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/analytics/top-selling-plants", "host": ["{{baseUrl}}"], "path": ["api", "admin", "analytics", "top-selling-plants"]},
+                "description": "Returns the top selling plants.\n\nAuth: ADMIN\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Nursery Performance",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/analytics/nurseries", "host": ["{{baseUrl}}"], "path": ["api", "admin", "analytics", "nurseries"]},
+                "description": "Returns nursery performance ranked by order count.\n\nAuth: ADMIN\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Most Active Nursery",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/analytics/most-active-nursery", "host": ["{{baseUrl}}"], "path": ["api", "admin", "analytics", "most-active-nursery"]},
+                "description": "Returns the most active nursery by order count.\n\nAuth: ADMIN\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Revenue By Month",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/analytics/revenue-by-month", "host": ["{{baseUrl}}"], "path": ["api", "admin", "analytics", "revenue-by-month"]},
+                "description": "Returns revenue grouped by month for charts.\n\nAuth: ADMIN\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "User Growth",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/analytics/user-growth", "host": ["{{baseUrl}}"], "path": ["api", "admin", "analytics", "user-growth"]},
+                "description": "Returns new user registrations grouped by month.\n\nAuth: ADMIN\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Order Growth",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/analytics/order-growth", "host": ["{{baseUrl}}"], "path": ["api", "admin", "analytics", "order-growth"]},
+                "description": "Returns orders grouped by month.\n\nAuth: ADMIN\nResponses: 200 OK | 401/403"
+              }
+            },
+            {
+              "name": "Plant Category Statistics",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/analytics/plant-category-statistics", "host": ["{{baseUrl}}"], "path": ["api", "admin", "analytics", "plant-category-statistics"]},
+                "description": "Returns plant counts grouped by category.\n\nAuth: ADMIN\nResponses: 200 OK | 401/403"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Security Tests",
+          "description": "Verify role-based access control on a protected admin endpoint.",
+          "item": [
+            {
+              "name": "Dashboard Without Token (Expect 401)",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {"raw": "{{baseUrl}}/api/admin/dashboard", "host": ["{{baseUrl}}"], "path": ["api", "admin", "dashboard"]},
+                "description": "Negative test: calling an admin endpoint without any token.\n\nExpected: 401 Unauthorized"
+              },
+              "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+                "pm.test(\"Status is 401 Unauthorized\", function () { pm.response.to.have.status(401); });"
+              ]}}]
+            },
+            {
+              "name": "Dashboard With Customer Token (Expect 403)",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{customerToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/dashboard", "host": ["{{baseUrl}}"], "path": ["api", "admin", "dashboard"]},
+                "description": "Negative test: calling an admin endpoint with a customer token.\n\nExpected: 403 Forbidden (insufficient role)"
+              },
+              "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+                "pm.test(\"Status is 403 Forbidden\", function () { pm.response.to.have.status(403); });"
+              ]}}]
+            },
+            {
+              "name": "Dashboard With Admin Token (Expect 200)",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/dashboard", "host": ["{{baseUrl}}"], "path": ["api", "admin", "dashboard"]},
+                "description": "Positive test: calling an admin endpoint with a valid admin token.\n\nExpected: 200 OK\n\nTest: verifies 200 and success field."
+              },
+              "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+                "pm.test(\"Status is 200 OK\", function () { pm.response.to.have.status(200); });",
+                "pm.test(\"Response has success field\", function () { pm.expect(pm.response.json()).to.have.property('success'); });"
+              ]}}]
+            },
+            {
+              "name": "Invalid JWT Token (Expect 401)",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer invalid.token.value"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/dashboard", "host": ["{{baseUrl}}"], "path": ["api", "admin", "dashboard"]},
+                "description": "Negative test: calling an admin endpoint with an invalid JWT.\n\nExpected: 401 Unauthorized"
+              },
+              "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+                "pm.test(\"Status is 401 Unauthorized\", function () { pm.response.to.have.status(401); });"
+              ]}}]
+            },
+            {
+              "name": "Non-Existing User (Expect 404)",
+              "request": {
+                "method": "GET",
+                "header": [{"key": "Authorization", "value": "Bearer {{adminToken}}"}],
+                "url": {"raw": "{{baseUrl}}/api/admin/users/00000000-0000-0000-0000-000000000000", "host": ["{{baseUrl}}"], "path": ["api", "admin", "users", "00000000-0000-0000-0000-000000000000"]},
+                "description": "Negative test: fetching a non-existent user.\n\nExpected: 404 Not Found"
+              },
+              "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+                "pm.test(\"Status is 404 Not Found\", function () { pm.response.to.have.status(404); });"
+              ]}}]
+            },
+            {
+              "name": "Duplicate Category (Expect 400)",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {"key": "Content-Type", "value": "application/json"},
+                  {"key": "Authorization", "value": "Bearer {{adminToken}}"}
+                ],
+                "body": {"mode": "raw", "raw": "{\n  \"name\": \"Indoor Plants\",\n  \"description\": \"Duplicate category test\",\n  \"icon\": \"leaf\",\n  \"active\": true\n}"},
+                "url": {"raw": "{{baseUrl}}/api/admin/categories", "host": ["{{baseUrl}}"], "path": ["api", "admin", "categories"]},
+                "description": "Negative test: creating a category with a duplicate name.\n\nExpected: 400 Bad Request (duplicate category)"
+              },
+              "event": [{"listen": "test", "script": {"type": "text/javascript", "exec": [
+                "pm.test(\"Status is 400 Bad Request\", function () { pm.response.to.have.status(400); });"
+              ]}}]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

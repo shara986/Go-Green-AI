@@ -1,0 +1,20 @@
+package com.gogreen.ai.dto.response;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Getter
+@Setter
+public class AdminCategoryResponseDto {
+    private UUID id;
+    private String name;
+    private String slug;
+    private String description;
+    private String icon;
+    private boolean active;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+}

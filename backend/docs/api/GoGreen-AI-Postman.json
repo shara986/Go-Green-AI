@@ -1,0 +1,119 @@
+{
+  "info": {
+    "name": "GoGreen AI API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register Customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Asha Kumar\",\n  \"username\": \"ashakumar\",\n  \"email\": \"asha@example.com\",\n  \"password\": \"Password123!\",\n  \"confirmPassword\": \"Password123!\",\n  \"phoneNumber\": \"9876543210\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/register/customer",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "auth", "register", "customer"]
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"usernameOrEmail\": \"ashakumar\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/login",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"<refresh-token>\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/refresh-token",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "auth", "refresh-token"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [
+              {"key": "Authorization", "value": "Bearer <access-token>"}
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/admin/dashboard",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "admin", "dashboard"]
+            }
+          }
+        },
+        {
+          "name": "List Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {"key": "Authorization", "value": "Bearer <access-token>"}
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/admin/users?page=0&size=20",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "admin", "users"]
+            }
+          }
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {"key": "Authorization", "value": "Bearer <access-token>"},
+              {"key": "Content-Type", "value": "application/json"}
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Indoor Plants\",\n  \"description\": \"Plants suited for indoor spaces\",\n  \"icon\": \"leaf\",\n  \"active\": true\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/admin/categories",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "admin", "categories"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

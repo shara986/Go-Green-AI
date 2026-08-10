@@ -1,0 +1,1277 @@
+[WARNING] Unable to find the root directory. Create a .mvn directory in the root directory or add the root="true" attribute on the root project's model to identify it.
+[INFO] Scanning for projects...
+[INFO] Loaded 23474 auto-discovered prefixes for remote repository central (prefixes-central.txt)
+[INFO] 
+[INFO] ---------------------------< com.gogreen:ai >---------------------------
+[INFO] Building GoGreen AI 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Loaded 74 auto-discovered prefixes for remote repository apache.snapshots (prefixes-apache.snapshots-c1d4c55f9308e5ac18a4069bed41dca64d85c515.txt)
+[INFO] 
+[INFO] >>> spring-boot:3.2.4:run (default-cli) > test-compile @ ai >>>
+[WARNING] Could not transfer metadata /.meta/prefixes.txt from/to spring-release-e22ad65be0b5fee6143d584bba6f2b61b37bb6bf (https://repo.spring.io/release): HTTP Status: 401
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ai ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ai ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ai ---
+[INFO] skip non existing resourceDirectory D:\Projects\Go-Green-AI\backend\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ai ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:3.2.4:run (default-cli) < test-compile @ ai <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.4:run (default-cli) @ ai ---
+[INFO] Loaded 50 auto-discovered prefixes for remote repository ow2-snapshot (prefixes-ow2-snapshot-40669f8efefaadb4c1705a2585cefc8851f735ac.txt)
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.4)
+
+2026-08-09T15:58:21.364+05:30  INFO 9748 --- [GoGreen AI] [           main] com.gogreen.ai.GoGreenAiApplication      : Starting GoGreenAiApplication using Java 25.0.1 with PID 9748 (D:\Projects\Go-Green-AI\backend\target\classes started by Sharayu in D:\Projects\Go-Green-AI\backend)
+2026-08-09T15:58:21.409+05:30  INFO 9748 --- [GoGreen AI] [           main] com.gogreen.ai.GoGreenAiApplication      : No active profile set, falling back to 1 default profile: "default"
+2026-08-09T15:58:22.224+05:30  INFO 9748 --- [GoGreen AI] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-08-09T15:58:22.363+05:30  INFO 9748 --- [GoGreen AI] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 88 ms. Found 20 JPA repository interfaces.
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/C:/Users/Sharayu/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.19/tomcat-embed-core-10.1.19.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+2026-08-09T15:58:22.984+05:30  INFO 9748 --- [GoGreen AI] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-08-09T15:58:23.038+05:30  INFO 9748 --- [GoGreen AI] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-08-09T15:58:23.039+05:30  INFO 9748 --- [GoGreen AI] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2026-08-09T15:58:23.094+05:30  INFO 9748 --- [GoGreen AI] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-08-09T15:58:23.138+05:30  INFO 9748 --- [GoGreen AI] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1679 ms
+2026-08-09T15:58:23.281+05:30  INFO 9748 --- [GoGreen AI] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-08-09T15:58:23.364+05:30  INFO 9748 --- [GoGreen AI] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-08-09T15:58:23.393+05:30  INFO 9748 --- [GoGreen AI] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-08-09T15:58:23.601+05:30  INFO 9748 --- [GoGreen AI] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-08-09T15:58:23.665+05:30  INFO 9748 --- [GoGreen AI] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-08-09T15:58:23.808+05:30  INFO 9748 --- [GoGreen AI] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:gogreen_ai_db user=SA
+2026-08-09T15:58:23.853+05:30  INFO 9748 --- [GoGreen AI] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-08-09T15:58:23.871+05:30  WARN 9748 --- [GoGreen AI] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-08-09T15:58:24.896+05:30  INFO 9748 --- [GoGreen AI] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: 
+    create table announcements (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        is_active boolean not null,
+        message varchar(2000) not null,
+        title varchar(150) not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table cart_items (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        quantity integer not null,
+        cart_id uuid not null,
+        plant_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table carts (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        user_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table categories (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        is_active boolean not null,
+        description varchar(500),
+        icon varchar(100),
+        image_url varchar(500),
+        name varchar(100) not null,
+        slug varchar(120) not null,
+        parent_id uuid,
+        primary key (id)
+    )
+Hibernate: 
+    create table consultations (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        duration_minutes integer,
+        meeting_link varchar(500),
+        notes varchar(1000),
+        scheduled_at timestamp(6),
+        status varchar(30) not null check (status in ('REQUESTED','SCHEDULED','IN_PROGRESS','COMPLETED','CANCELLED')),
+        subject varchar(200) not null,
+        expert_id uuid not null,
+        user_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table disease_histories (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        confidence_score float(53),
+        date_identified date not null,
+        disease_identified varchar(150) not null,
+        image_url varchar(500),
+        plant_name varchar(150) not null,
+        recommended_action varchar(2000),
+        severity varchar(20) check (severity in ('LOW','MODERATE','HIGH','CRITICAL')),
+        user_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table inventories (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        last_restock_date timestamp(6),
+        reorder_level integer not null check (reorder_level>=0),
+        reserved_quantity integer not null check (reserved_quantity>=0),
+        stock_level integer not null check (stock_level>=0),
+        plant_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table notifications (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        message varchar(500) not null,
+        is_read boolean not null,
+        read_at timestamp(6),
+        title varchar(150) not null,
+        type varchar(30) not null check (type in ('ORDER_UPDATE','PAYMENT','CONSULTATION','PLANT_CARE_REMINDER','DISEASE_ALERT','PROMOTION','SYSTEM')),
+        user_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table nurseries (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        address varchar(500) not null,
+        approval_status tinyint not null check (approval_status between 0 and 3),
+        city varchar(100),
+        contact_email varchar(150),
+        contact_phone varchar(20),
+        description varchar(1000),
+        logo_url varchar(500),
+        name varchar(150) not null,
+        postal_code varchar(20),
+        rating float(53) check ((rating<=5) and (rating>=0)),
+        rejection_reason varchar(500),
+        is_verified boolean not null,
+        user_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table order_items (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        quantity integer not null,
+        subtotal float(53) not null,
+        unit_price float(53) not null,
+        order_id uuid not null,
+        plant_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table orders (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        billing_address varchar(500),
+        order_number varchar(30) not null,
+        shipping_address varchar(500) not null,
+        status varchar(30) not null check (status in ('PENDING','CONFIRMED','PROCESSING','SHIPPED','DELIVERED','CANCELLED','REFUNDED')),
+        total_amount float(53) not null,
+        user_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table payments (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        amount float(53) not null,
+        payment_method varchar(50) not null,
+        status varchar(30) not null check (status in ('PENDING','COMPLETED','FAILED','REFUNDED')),
+        transaction_id varchar(100),
+        order_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table plant_diaries (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        date_started date not null,
+        description varchar(500),
+        plant_name varchar(150) not null,
+        plant_id uuid,
+        user_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table plant_diary_entries (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        entry_date date not null,
+        note varchar(2000),
+        photo_url varchar(500),
+        diary_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table plants (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        is_active boolean not null,
+        care_instructions varchar(2000),
+        description varchar(2000),
+        image_url varchar(500),
+        name varchar(150) not null,
+        plant_type varchar(30) not null check (plant_type in ('INDOOR','OUTDOOR','SUCCULENT','FLOWERING','HERB','VEGETABLE','FRUIT','BONSAI','MEDICINAL')),
+        price float(53) not null,
+        scientific_name varchar(150),
+        sku varchar(50) not null,
+        stock integer not null check (stock>=0),
+        category_id uuid not null,
+        nursery_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table reviews (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        comment varchar(1000),
+        rating integer not null check ((rating<=5) and (rating>=1)),
+        plant_id uuid not null,
+        user_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table roles (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        name varchar(50) not null check (name in ('ROLE_ADMIN','ROLE_CUSTOMER','ROLE_NURSERY_OWNER','ROLE_GARDENING_EXPERT','ROLE_DELIVERY_PARTNER')),
+        primary key (id)
+    )
+Hibernate: 
+    create table users (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        approval_status tinyint not null check (approval_status between 0 and 4),
+        is_deleted boolean not null,
+        email varchar(150) not null,
+        enabled boolean not null,
+        name varchar(100) not null,
+        password varchar(255) not null,
+        phone_number varchar(20),
+        rejection_reason varchar(500),
+        username varchar(50) not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table users_roles (
+        user_id uuid not null,
+        role_id uuid not null,
+        primary key (user_id, role_id)
+    )
+Hibernate: 
+    create table wishlist_items (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        plant_id uuid not null,
+        wishlist_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table wishlists (
+        id uuid not null,
+        created_at timestamp(6) not null,
+        updated_at timestamp(6) not null,
+        user_id uuid not null,
+        primary key (id)
+    )
+Hibernate: 
+    create index idx_announcements_active 
+       on announcements (is_active)
+Hibernate: 
+    create index idx_announcements_created_at 
+       on announcements (created_at)
+Hibernate: 
+    create index idx_cart_items_cart_id 
+       on cart_items (cart_id)
+Hibernate: 
+    create index idx_cart_items_plant_id 
+       on cart_items (plant_id)
+Hibernate: 
+    alter table if exists cart_items 
+       drop constraint if exists uk_cart_items_cart_plant
+Hibernate: 
+    alter table if exists cart_items 
+       add constraint uk_cart_items_cart_plant unique (cart_id, plant_id)
+Hibernate: 
+    create index idx_carts_user_id 
+       on carts (user_id)
+Hibernate: 
+    alter table if exists carts 
+       drop constraint if exists UK_64t7ox312pqal3p7fg9o503c2
+Hibernate: 
+    alter table if exists carts 
+       add constraint UK_64t7ox312pqal3p7fg9o503c2 unique (user_id)
+Hibernate: 
+    create index idx_categories_name 
+       on categories (name)
+Hibernate: 
+    create index idx_categories_slug 
+       on categories (slug)
+Hibernate: 
+    create index idx_categories_parent_id 
+       on categories (parent_id)
+Hibernate: 
+    alter table if exists categories 
+       drop constraint if exists UK_t8o6pivur7nn124jehx7cygw5
+Hibernate: 
+    alter table if exists categories 
+       add constraint UK_t8o6pivur7nn124jehx7cygw5 unique (name)
+Hibernate: 
+    alter table if exists categories 
+       drop constraint if exists UK_oul14ho7bctbefv8jywp5v3i2
+Hibernate: 
+    alter table if exists categories 
+       add constraint UK_oul14ho7bctbefv8jywp5v3i2 unique (slug)
+Hibernate: 
+    create index idx_consultations_user_id 
+       on consultations (user_id)
+Hibernate: 
+    create index idx_consultations_expert_id 
+       on consultations (expert_id)
+Hibernate: 
+    create index idx_consultations_status 
+       on consultations (status)
+Hibernate: 
+    create index idx_disease_histories_user_id 
+       on disease_histories (user_id)
+Hibernate: 
+    create index idx_disease_histories_date 
+       on disease_histories (date_identified)
+Hibernate: 
+    create index idx_inventories_plant_id 
+       on inventories (plant_id)
+Hibernate: 
+    alter table if exists inventories 
+       drop constraint if exists UK_hc1a4bn7ygkyaamxv5kogx4yc
+Hibernate: 
+    alter table if exists inventories 
+       add constraint UK_hc1a4bn7ygkyaamxv5kogx4yc unique (plant_id)
+Hibernate: 
+    create index idx_notifications_user_id 
+       on notifications (user_id)
+Hibernate: 
+    create index idx_notifications_type 
+       on notifications (type)
+Hibernate: 
+    create index idx_notifications_is_read 
+       on notifications (is_read)
+Hibernate: 
+    create index idx_nurseries_name 
+       on nurseries (name)
+Hibernate: 
+    create index idx_nurseries_user_id 
+       on nurseries (user_id)
+Hibernate: 
+    alter table if exists nurseries 
+       drop constraint if exists UK_fsq0disww700guhgrdee6ad3p
+Hibernate: 
+    alter table if exists nurseries 
+       add constraint UK_fsq0disww700guhgrdee6ad3p unique (user_id)
+Hibernate: 
+    create index idx_order_items_order_id 
+       on order_items (order_id)
+Hibernate: 
+    create index idx_order_items_plant_id 
+       on order_items (plant_id)
+Hibernate: 
+    create index idx_orders_user_id 
+       on orders (user_id)
+Hibernate: 
+    create index idx_orders_status 
+       on orders (status)
+Hibernate: 
+    create index idx_orders_order_number 
+       on orders (order_number)
+Hibernate: 
+    alter table if exists orders 
+       drop constraint if exists UK_nthkiu7pgmnqnu86i2jyoe2v7
+Hibernate: 
+    alter table if exists orders 
+       add constraint UK_nthkiu7pgmnqnu86i2jyoe2v7 unique (order_number)
+Hibernate: 
+    create index idx_payments_order_id 
+       on payments (order_id)
+Hibernate: 
+    create index idx_payments_status 
+       on payments (status)
+Hibernate: 
+    create index idx_payments_transaction_id 
+       on payments (transaction_id)
+Hibernate: 
+    alter table if exists payments 
+       drop constraint if exists UK_lryndveuwa4k5qthti0pkmtlx
+Hibernate: 
+    alter table if exists payments 
+       add constraint UK_lryndveuwa4k5qthti0pkmtlx unique (transaction_id)
+Hibernate: 
+    alter table if exists payments 
+       drop constraint if exists UK_8vo36cen604as7etdfwmyjsxt
+Hibernate: 
+    alter table if exists payments 
+       add constraint UK_8vo36cen604as7etdfwmyjsxt unique (order_id)
+Hibernate: 
+    create index idx_plant_diaries_user_id 
+       on plant_diaries (user_id)
+Hibernate: 
+    create index idx_plant_diaries_plant_id 
+       on plant_diaries (plant_id)
+Hibernate: 
+    create index idx_plant_diary_entries_diary_id 
+       on plant_diary_entries (diary_id)
+Hibernate: 
+    create index idx_plant_diary_entries_entry_date 
+       on plant_diary_entries (entry_date)
+Hibernate: 
+    create index idx_plants_nursery_id 
+       on plants (nursery_id)
+Hibernate: 
+    create index idx_plants_category_id 
+       on plants (category_id)
+Hibernate: 
+    create index idx_plants_name 
+       on plants (name)
+Hibernate: 
+    create index idx_plants_plant_type 
+       on plants (plant_type)
+Hibernate: 
+    alter table if exists plants 
+       drop constraint if exists uk_plants_nursery_sku
+Hibernate: 
+    alter table if exists plants 
+       add constraint uk_plants_nursery_sku unique (nursery_id, sku)
+Hibernate: 
+    create index idx_reviews_user_id 
+       on reviews (user_id)
+Hibernate: 
+    create index idx_reviews_plant_id 
+       on reviews (plant_id)
+Hibernate: 
+    alter table if exists reviews 
+       drop constraint if exists uk_reviews_user_plant
+Hibernate: 
+    alter table if exists reviews 
+       add constraint uk_reviews_user_plant unique (user_id, plant_id)
+Hibernate: 
+    create index idx_roles_name 
+       on roles (name)
+Hibernate: 
+    alter table if exists roles 
+       drop constraint if exists UK_ofx66keruapi6vyqpv6f2or37
+Hibernate: 
+    alter table if exists roles 
+       add constraint UK_ofx66keruapi6vyqpv6f2or37 unique (name)
+Hibernate: 
+    create index idx_users_email 
+       on users (email)
+Hibernate: 
+    create index idx_users_username 
+       on users (username)
+Hibernate: 
+    alter table if exists users 
+       drop constraint if exists UK_6dotkott2kjsp8vw4d0m25fb7
+Hibernate: 
+    alter table if exists users 
+       add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email)
+Hibernate: 
+    alter table if exists users 
+       drop constraint if exists UK_r43af9ap4edm43mmtq01oddj6
+Hibernate: 
+    alter table if exists users 
+       add constraint UK_r43af9ap4edm43mmtq01oddj6 unique (username)
+Hibernate: 
+    create index idx_wishlist_items_wishlist_id 
+       on wishlist_items (wishlist_id)
+Hibernate: 
+    create index idx_wishlist_items_plant_id 
+       on wishlist_items (plant_id)
+Hibernate: 
+    alter table if exists wishlist_items 
+       drop constraint if exists uk_wishlist_items_wishlist_plant
+Hibernate: 
+    alter table if exists wishlist_items 
+       add constraint uk_wishlist_items_wishlist_plant unique (wishlist_id, plant_id)
+Hibernate: 
+    create index idx_wishlists_user_id 
+       on wishlists (user_id)
+Hibernate: 
+    alter table if exists wishlists 
+       drop constraint if exists UK_obh8c909a28dx3aqh4cbdhh25
+Hibernate: 
+    alter table if exists wishlists 
+       add constraint UK_obh8c909a28dx3aqh4cbdhh25 unique (user_id)
+Hibernate: 
+    alter table if exists cart_items 
+       add constraint FKpcttvuq4mxppo8sxggjtn5i2c 
+       foreign key (cart_id) 
+       references carts
+Hibernate: 
+    alter table if exists cart_items 
+       add constraint FKa4imbp4bk4tbpoqgup47284nw 
+       foreign key (plant_id) 
+       references plants
+Hibernate: 
+    alter table if exists carts 
+       add constraint FKb5o626f86h46m4s7ms6ginnop 
+       foreign key (user_id) 
+       references users
+Hibernate: 
+    alter table if exists categories 
+       add constraint FKsaok720gsu4u2wrgbk10b5n8d 
+       foreign key (parent_id) 
+       references categories
+Hibernate: 
+    alter table if exists consultations 
+       add constraint FKrncaaitent6a0e0vba7b0w521 
+       foreign key (expert_id) 
+       references users
+Hibernate: 
+    alter table if exists consultations 
+       add constraint FK96gr1fy33fqe11s3fi2ynyq24 
+       foreign key (user_id) 
+       references users
+Hibernate: 
+    alter table if exists disease_histories 
+       add constraint FK3vqf4ebqcopc2vbdhjvfiwwoa 
+       foreign key (user_id) 
+       references users
+Hibernate: 
+    alter table if exists inventories 
+       add constraint FKh3s7ougv0c5jw0bql5uy3l7g7 
+       foreign key (plant_id) 
+       references plants
+Hibernate: 
+    alter table if exists notifications 
+       add constraint FK9y21adhxn0ayjhfocscqox7bh 
+       foreign key (user_id) 
+       references users
+Hibernate: 
+    alter table if exists nurseries 
+       add constraint FK66ve2gvy1n79t8vueh4kfc03k 
+       foreign key (user_id) 
+       references users
+Hibernate: 
+    alter table if exists order_items 
+       add constraint FKbioxgbv59vetrxe0ejfubep1w 
+       foreign key (order_id) 
+       references orders
+Hibernate: 
+    alter table if exists order_items 
+       add constraint FKh19tu3fmpiq6task47pamxkg8 
+       foreign key (plant_id) 
+       references plants
+Hibernate: 
+    alter table if exists orders 
+       add constraint FK32ql8ubntj5uh44ph9659tiih 
+       foreign key (user_id) 
+       references users
+Hibernate: 
+    alter table if exists payments 
+       add constraint FK81gagumt0r8y3rmudcgpbk42l 
+       foreign key (order_id) 
+       references orders
+Hibernate: 
+    alter table if exists plant_diaries 
+       add constraint FK9xmjh9xhbir1oc0hgly9k7qa 
+       foreign key (plant_id) 
+       references plants
+Hibernate: 
+    alter table if exists plant_diaries 
+       add constraint FKcnej4fth8md0l3igqq4r9rens 
+       foreign key (user_id) 
+       references users
+Hibernate: 
+    alter table if exists plant_diary_entries 
+       add constraint FKptutkhjg5ubnwnsm6mv7eimdb 
+       foreign key (diary_id) 
+       references plant_diaries
+Hibernate: 
+    alter table if exists plants 
+       add constraint FKgk96wou3hd3xfgqlisa1e0lyc 
+       foreign key (category_id) 
+       references categories
+Hibernate: 
+    alter table if exists plants 
+       add constraint FKtb1vnn4n5rxt0aabivf9m1wtv 
+       foreign key (nursery_id) 
+       references nurseries
+Hibernate: 
+    alter table if exists reviews 
+       add constraint FKikupr4md3v4ummq9116lwio4v 
+       foreign key (plant_id) 
+       references plants
+Hibernate: 
+    alter table if exists reviews 
+       add constraint FKcgy7qjc1r99dp117y9en6lxye 
+       foreign key (user_id) 
+       references users
+Hibernate: 
+    alter table if exists users_roles 
+       add constraint FKj6m8fwv7oqv74fcehir1a9ffy 
+       foreign key (role_id) 
+       references roles
+Hibernate: 
+    alter table if exists users_roles 
+       add constraint FK2o0jvgh89lemvvo17cbqvdxaa 
+       foreign key (user_id) 
+       references users
+Hibernate: 
+    alter table if exists wishlist_items 
+       add constraint FKcsqlen45tul6dx16r9mwl4hc1 
+       foreign key (plant_id) 
+       references plants
+Hibernate: 
+    alter table if exists wishlist_items 
+       add constraint FKkem9l8vd14pk3cc4elnpl0n00 
+       foreign key (wishlist_id) 
+       references wishlists
+Hibernate: 
+    alter table if exists wishlists 
+       add constraint FK330pyw2el06fn5g28ypyljt16 
+       foreign key (user_id) 
+       references users
+2026-08-09T15:58:25.080+05:30  INFO 9748 --- [GoGreen AI] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-08-09T15:58:25.336+05:30  INFO 9748 --- [GoGreen AI] [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-08-09T15:58:26.891+05:30  WARN 9748 --- [GoGreen AI] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-08-09T15:58:27.166+05:30  INFO 9748 --- [GoGreen AI] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@d1e1548, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6d234853, org.springframework.security.web.context.SecurityContextHolderFilter@7f445761, org.springframework.security.web.header.HeaderWriterFilter@461baea9, org.springframework.web.filter.CorsFilter@37cf8e35, org.springframework.security.web.authentication.logout.LogoutFilter@4d437408, com.gogreen.ai.security.JwtAuthenticationFilter@e888636, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@67652cca, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5272b626, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1456ada1, org.springframework.security.web.session.SessionManagementFilter@6c304a3f, org.springframework.security.web.access.ExceptionTranslationFilter@9ec7b1, org.springframework.security.web.access.intercept.AuthorizationFilter@629059a9]
+2026-08-09T15:58:27.658+05:30  INFO 9748 --- [GoGreen AI] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-08-09T15:58:27.711+05:30  INFO 9748 --- [GoGreen AI] [           main] com.gogreen.ai.GoGreenAiApplication      : Started GoGreenAiApplication in 6.778 seconds (process running for 7.168)
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id 
+    from
+        users u1_0 
+    where
+        u1_0.email=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        r1_0.id,
+        r1_0.created_at,
+        r1_0.name,
+        r1_0.updated_at 
+    from
+        roles r1_0 
+    where
+        r1_0.name=?
+2026-08-09T15:58:27.950+05:30  INFO 9748 --- [GoGreen AI] [           main] c.g.ai.config.AdminDataInitializer       : Default admin created successfully
+Hibernate: 
+    insert 
+    into
+        roles
+        (created_at, name, updated_at, id) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users
+        (approval_status, created_at, is_deleted, email, enabled, name, password, phone_number, rejection_reason, updated_at, username, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        users_roles
+        (user_id, role_id) 
+    values
+        (?, ?)
+2026-08-09T15:59:26.113+05:30  INFO 9748 --- [GoGreen AI] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-09T15:59:26.129+05:30  INFO 9748 --- [GoGreen AI] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-08-09T15:59:26.132+05:30  INFO 9748 --- [GoGreen AI] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.approval_status,
+        u1_0.created_at,
+        u1_0.is_deleted,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.rejection_reason,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+        or u1_0.email=?
+Hibernate: 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.name,
+        r1_1.updated_at 
+    from
+        users_roles r1_0 
+    join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        r1_0.user_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.approval_status,
+        u1_0.created_at,
+        u1_0.is_deleted,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.rejection_reason,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+        or u1_0.email=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.approval_status,
+        u1_0.created_at,
+        u1_0.is_deleted,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.rejection_reason,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+        or u1_0.email=?
+Hibernate: 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.name,
+        r1_1.updated_at 
+    from
+        users_roles r1_0 
+    join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        r1_0.user_id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        users u1_0
+Hibernate: 
+    select
+        count(u1_0.id) 
+    from
+        users u1_0 
+    left join
+        users_roles r1_0 
+            on u1_0.id=r1_0.user_id 
+    left join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        not(u1_0.is_deleted) 
+        and r1_1.name=?
+Hibernate: 
+    select
+        count(u1_0.id) 
+    from
+        users u1_0 
+    left join
+        users_roles r1_0 
+            on u1_0.id=r1_0.user_id 
+    left join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        not(u1_0.is_deleted) 
+        and r1_1.name=?
+Hibernate: 
+    select
+        count(u1_0.id) 
+    from
+        users u1_0 
+    left join
+        users_roles r1_0 
+            on u1_0.id=r1_0.user_id 
+    left join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        not(u1_0.is_deleted) 
+        and r1_1.name=?
+Hibernate: 
+    select
+        count(u1_0.id) 
+    from
+        users u1_0 
+    left join
+        users_roles r1_0 
+            on u1_0.id=r1_0.user_id 
+    left join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        not(u1_0.is_deleted) 
+        and r1_1.name=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        plants p1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        categories c1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        coalesce(sum(o1_0.total_amount), 0) 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        coalesce(sum(o1_0.total_amount), 0) 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        count(n1_0.id) 
+    from
+        nurseries n1_0 
+    where
+        n1_0.approval_status=?
+Hibernate: 
+    select
+        count(u1_0.id) 
+    from
+        users u1_0 
+    left join
+        users_roles r1_0 
+            on u1_0.id=r1_0.user_id 
+    left join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        not(u1_0.is_deleted) 
+        and r1_1.name=? 
+        and u1_0.approval_status=?
+Hibernate: 
+    select
+        count(u1_0.id) 
+    from
+        users u1_0 
+    left join
+        users_roles r1_0 
+            on u1_0.id=r1_0.user_id 
+    left join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        not(u1_0.is_deleted) 
+        and r1_1.name=? 
+        and u1_0.approval_status=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.approval_status,
+        u1_0.created_at,
+        u1_0.is_deleted,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.rejection_reason,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+        or u1_0.email=?
+Hibernate: 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.name,
+        r1_1.updated_at 
+    from
+        users_roles r1_0 
+    join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        r1_0.user_id=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        users u1_0
+Hibernate: 
+    select
+        count(u1_0.id) 
+    from
+        users u1_0 
+    left join
+        users_roles r1_0 
+            on u1_0.id=r1_0.user_id 
+    left join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        not(u1_0.is_deleted) 
+        and r1_1.name=?
+Hibernate: 
+    select
+        count(u1_0.id) 
+    from
+        users u1_0 
+    left join
+        users_roles r1_0 
+            on u1_0.id=r1_0.user_id 
+    left join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        not(u1_0.is_deleted) 
+        and r1_1.name=?
+Hibernate: 
+    select
+        count(u1_0.id) 
+    from
+        users u1_0 
+    left join
+        users_roles r1_0 
+            on u1_0.id=r1_0.user_id 
+    left join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        not(u1_0.is_deleted) 
+        and r1_1.name=?
+Hibernate: 
+    select
+        count(u1_0.id) 
+    from
+        users u1_0 
+    left join
+        users_roles r1_0 
+            on u1_0.id=r1_0.user_id 
+    left join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        not(u1_0.is_deleted) 
+        and r1_1.name=?
+Hibernate: 
+    select
+        count(*) 
+    from
+        plants p1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        categories c1_0
+Hibernate: 
+    select
+        count(*) 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        coalesce(sum(o1_0.total_amount), 0) 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        coalesce(sum(o1_0.total_amount), 0) 
+    from
+        orders o1_0
+Hibernate: 
+    select
+        count(n1_0.id) 
+    from
+        nurseries n1_0 
+    where
+        n1_0.approval_status=?
+Hibernate: 
+    select
+        count(u1_0.id) 
+    from
+        users u1_0 
+    left join
+        users_roles r1_0 
+            on u1_0.id=r1_0.user_id 
+    left join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        not(u1_0.is_deleted) 
+        and r1_1.name=? 
+        and u1_0.approval_status=?
+Hibernate: 
+    select
+        count(u1_0.id) 
+    from
+        users u1_0 
+    left join
+        users_roles r1_0 
+            on u1_0.id=r1_0.user_id 
+    left join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        not(u1_0.is_deleted) 
+        and r1_1.name=? 
+        and u1_0.approval_status=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.approval_status,
+        u1_0.created_at,
+        u1_0.is_deleted,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.rejection_reason,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+        or u1_0.email=?
+Hibernate: 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.name,
+        r1_1.updated_at 
+    from
+        users_roles r1_0 
+    join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        r1_0.user_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.approval_status,
+        u1_0.created_at,
+        u1_0.is_deleted,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.rejection_reason,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.is_deleted=false 
+        and (
+            ? is null 
+            or lower(u1_0.name) like lower(('%'||?||'%')) escape '' 
+            or lower(u1_0.username) like lower(('%'||?||'%')) escape '' 
+            or lower(u1_0.email) like lower(('%'||?||'%')) escape ''
+        ) 
+        and (
+            ? is null 
+            or ? in (select
+                r1_1.name 
+            from
+                users_roles r1_0 
+            join
+                roles r1_1 
+                    on r1_1.id=r1_0.role_id 
+            where
+                u1_0.id=r1_0.user_id)
+        ) 
+        and (
+            ? is null 
+            or u1_0.approval_status=?
+        ) 
+        and (
+            ? is null 
+            or u1_0.enabled=?
+        ) 
+    order by
+        u1_0.created_at desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.name,
+        r1_1.updated_at 
+    from
+        users_roles r1_0 
+    join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        r1_0.user_id=?
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.approval_status,
+        u1_0.created_at,
+        u1_0.is_deleted,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.rejection_reason,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+        or u1_0.email=?
+Hibernate: 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.name,
+        r1_1.updated_at 
+    from
+        users_roles r1_0 
+    join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        r1_0.user_id=?
+Hibernate: 
+    select
+        c1_0.id 
+    from
+        categories c1_0 
+    where
+        c1_0.name=? 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        u1_0.id,
+        u1_0.approval_status,
+        u1_0.created_at,
+        u1_0.is_deleted,
+        u1_0.email,
+        u1_0.enabled,
+        u1_0.name,
+        u1_0.password,
+        u1_0.phone_number,
+        u1_0.rejection_reason,
+        u1_0.updated_at,
+        u1_0.username 
+    from
+        users u1_0 
+    where
+        u1_0.username=? 
+        or u1_0.email=?
+Hibernate: 
+    select
+        r1_0.user_id,
+        r1_1.id,
+        r1_1.created_at,
+        r1_1.name,
+        r1_1.updated_at 
+    from
+        users_roles r1_0 
+    join
+        roles r1_1 
+            on r1_1.id=r1_0.role_id 
+    where
+        r1_0.user_id=?
+Hibernate: 
+    select
+        c1_0.id 
+    from
+        categories c1_0 
+    where
+        c1_0.name=? 
+    fetch
+        first ? rows only
