@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-08-10T19:23:48+0530",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
+    date = "2026-08-12T15:06:18+0530",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.12 (Oracle Corporation)"
 )
 @Component
 public class NurseryMapperImpl implements NurseryMapper {
@@ -27,20 +27,20 @@ public class NurseryMapperImpl implements NurseryMapper {
         NurseryResponseDto nurseryResponseDto = new NurseryResponseDto();
 
         nurseryResponseDto.setUserId( nurseryUserId( nursery ) );
+        nurseryResponseDto.setId( nursery.getId() );
+        nurseryResponseDto.setName( nursery.getName() );
+        nurseryResponseDto.setDescription( nursery.getDescription() );
         nurseryResponseDto.setAddress( nursery.getAddress() );
-        nurseryResponseDto.setApprovalStatus( nursery.getApprovalStatus() );
         nurseryResponseDto.setCity( nursery.getCity() );
+        nurseryResponseDto.setPostalCode( nursery.getPostalCode() );
         nurseryResponseDto.setContactEmail( nursery.getContactEmail() );
         nurseryResponseDto.setContactPhone( nursery.getContactPhone() );
-        nurseryResponseDto.setCreatedAt( nursery.getCreatedAt() );
-        nurseryResponseDto.setDescription( nursery.getDescription() );
-        nurseryResponseDto.setId( nursery.getId() );
-        nurseryResponseDto.setLogoUrl( nursery.getLogoUrl() );
-        nurseryResponseDto.setName( nursery.getName() );
-        nurseryResponseDto.setPostalCode( nursery.getPostalCode() );
         nurseryResponseDto.setRating( nursery.getRating() );
-        nurseryResponseDto.setUpdatedAt( nursery.getUpdatedAt() );
         nurseryResponseDto.setVerified( nursery.isVerified() );
+        nurseryResponseDto.setApprovalStatus( nursery.getApprovalStatus() );
+        nurseryResponseDto.setLogoUrl( nursery.getLogoUrl() );
+        nurseryResponseDto.setCreatedAt( nursery.getCreatedAt() );
+        nurseryResponseDto.setUpdatedAt( nursery.getUpdatedAt() );
 
         return nurseryResponseDto;
     }
