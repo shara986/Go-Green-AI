@@ -32,7 +32,6 @@ com\gogreen\ai\security\JwtAuthenticationEntryPoint.class
 com\gogreen\ai\dto\response\OrderItemResponseDto.class
 com\gogreen\ai\dto\response\PaymentResponseDto.class
 com\gogreen\ai\mapper\WishlistItemMapper.class
-com\gogreen\ai\util\CategorySlugGenerator.class
 com\gogreen\ai\dto\response\UserResponseDto.class
 com\gogreen\ai\controller\UserController.class
 com\gogreen\ai\entity\enums\UserApprovalStatus.class
@@ -44,7 +43,6 @@ com\gogreen\ai\dto\response\ReviewResponseDto.class
 com\gogreen\ai\entity\PlantDiary.class
 com\gogreen\ai\mapper\NurseryMapper.class
 com\gogreen\ai\mapper\PaymentMapper.class
-com\gogreen\ai\service\impl\UserServiceImpl.class
 com\gogreen\ai\dto\response\AnnouncementResponseDto.class
 com\gogreen\ai\repository\WishlistRepository.class
 com\gogreen\ai\repository\PlantRepository.class
