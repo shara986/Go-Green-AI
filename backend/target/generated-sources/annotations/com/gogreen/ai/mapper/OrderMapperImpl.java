@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-08-12T14:58:59+0530",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
+    date = "2026-08-12T15:06:18+0530",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.12 (Oracle Corporation)"
 )
 @Component
 public class OrderMapperImpl implements OrderMapper {
@@ -31,14 +31,14 @@ public class OrderMapperImpl implements OrderMapper {
         OrderResponseDto orderResponseDto = new OrderResponseDto();
 
         orderResponseDto.setUserId( orderUserId( order ) );
-        orderResponseDto.setBillingAddress( order.getBillingAddress() );
-        orderResponseDto.setCreatedAt( order.getCreatedAt() );
         orderResponseDto.setId( order.getId() );
-        orderResponseDto.setItems( orderItemMapper.toResponseDtoList( order.getItems() ) );
         orderResponseDto.setOrderNumber( order.getOrderNumber() );
-        orderResponseDto.setShippingAddress( order.getShippingAddress() );
-        orderResponseDto.setStatus( order.getStatus() );
         orderResponseDto.setTotalAmount( order.getTotalAmount() );
+        orderResponseDto.setStatus( order.getStatus() );
+        orderResponseDto.setShippingAddress( order.getShippingAddress() );
+        orderResponseDto.setBillingAddress( order.getBillingAddress() );
+        orderResponseDto.setItems( orderItemMapper.toResponseDtoList( order.getItems() ) );
+        orderResponseDto.setCreatedAt( order.getCreatedAt() );
         orderResponseDto.setUpdatedAt( order.getUpdatedAt() );
 
         return orderResponseDto;
@@ -66,11 +66,11 @@ public class OrderMapperImpl implements OrderMapper {
 
         Order order = new Order();
 
-        order.setBillingAddress( dto.getBillingAddress() );
         order.setOrderNumber( dto.getOrderNumber() );
-        order.setShippingAddress( dto.getShippingAddress() );
-        order.setStatus( dto.getStatus() );
         order.setTotalAmount( dto.getTotalAmount() );
+        order.setStatus( dto.getStatus() );
+        order.setShippingAddress( dto.getShippingAddress() );
+        order.setBillingAddress( dto.getBillingAddress() );
 
         return order;
     }

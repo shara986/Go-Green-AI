@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-08-12T14:58:58+0530",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
+    date = "2026-08-12T15:06:18+0530",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.12 (Oracle Corporation)"
 )
 @Component
 public class OrderItemMapperImpl implements OrderItemMapper {
@@ -30,11 +30,11 @@ public class OrderItemMapperImpl implements OrderItemMapper {
         orderItemResponseDto.setOrderId( orderItemOrderId( orderItem ) );
         orderItemResponseDto.setPlantId( orderItemPlantId( orderItem ) );
         orderItemResponseDto.setPlantName( orderItemPlantName( orderItem ) );
-        orderItemResponseDto.setCreatedAt( orderItem.getCreatedAt() );
         orderItemResponseDto.setId( orderItem.getId() );
         orderItemResponseDto.setQuantity( orderItem.getQuantity() );
-        orderItemResponseDto.setSubtotal( orderItem.getSubtotal() );
         orderItemResponseDto.setUnitPrice( orderItem.getUnitPrice() );
+        orderItemResponseDto.setSubtotal( orderItem.getSubtotal() );
+        orderItemResponseDto.setCreatedAt( orderItem.getCreatedAt() );
         orderItemResponseDto.setUpdatedAt( orderItem.getUpdatedAt() );
 
         return orderItemResponseDto;
@@ -63,8 +63,8 @@ public class OrderItemMapperImpl implements OrderItemMapper {
         OrderItem orderItem = new OrderItem();
 
         orderItem.setQuantity( dto.getQuantity() );
-        orderItem.setSubtotal( dto.getSubtotal() );
         orderItem.setUnitPrice( dto.getUnitPrice() );
+        orderItem.setSubtotal( dto.getSubtotal() );
 
         return orderItem;
     }
