@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-08-10T19:23:47+0530",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
+    date = "2026-08-12T15:06:18+0530",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.12 (Oracle Corporation)"
 )
 @Component
 public class PlantDiaryMapperImpl implements PlantDiaryMapper {
@@ -33,12 +33,12 @@ public class PlantDiaryMapperImpl implements PlantDiaryMapper {
 
         plantDiaryResponseDto.setUserId( plantDiaryUserId( plantDiary ) );
         plantDiaryResponseDto.setPlantId( plantDiaryPlantId( plantDiary ) );
-        plantDiaryResponseDto.setCreatedAt( plantDiary.getCreatedAt() );
-        plantDiaryResponseDto.setDateStarted( plantDiary.getDateStarted() );
-        plantDiaryResponseDto.setDescription( plantDiary.getDescription() );
-        plantDiaryResponseDto.setEntries( plantDiaryEntryMapper.toResponseDtoList( plantDiary.getEntries() ) );
         plantDiaryResponseDto.setId( plantDiary.getId() );
         plantDiaryResponseDto.setPlantName( plantDiary.getPlantName() );
+        plantDiaryResponseDto.setDescription( plantDiary.getDescription() );
+        plantDiaryResponseDto.setDateStarted( plantDiary.getDateStarted() );
+        plantDiaryResponseDto.setEntries( plantDiaryEntryMapper.toResponseDtoList( plantDiary.getEntries() ) );
+        plantDiaryResponseDto.setCreatedAt( plantDiary.getCreatedAt() );
         plantDiaryResponseDto.setUpdatedAt( plantDiary.getUpdatedAt() );
 
         return plantDiaryResponseDto;
@@ -66,9 +66,9 @@ public class PlantDiaryMapperImpl implements PlantDiaryMapper {
 
         PlantDiary plantDiary = new PlantDiary();
 
-        plantDiary.setDateStarted( dto.getDateStarted() );
-        plantDiary.setDescription( dto.getDescription() );
         plantDiary.setPlantName( dto.getPlantName() );
+        plantDiary.setDescription( dto.getDescription() );
+        plantDiary.setDateStarted( dto.getDateStarted() );
 
         return plantDiary;
     }

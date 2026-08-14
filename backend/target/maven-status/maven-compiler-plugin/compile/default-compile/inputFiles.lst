@@ -1,159 +1,177 @@
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\config\AdminDataInitializer.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\config\DevelopmentPlantDataInitializer.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\config\SwaggerConfig.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\controller\AdminController.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\controller\AuthController.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\controller\UserController.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\ApiResponse.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\ErrorDetails.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\JWTAuthResponse.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\LoginDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\RegisterDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\AdminCategoryRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\AdminNotificationRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\AdminUserFilterRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\AnnouncementRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\CartItemRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\CartRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\CategoryRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\ChangePasswordRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\ConsultationRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\DiseaseHistoryRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\ForgotPasswordRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\InventoryRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\LoginRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\NotificationRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\NurseryRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\OrderItemRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\OrderRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\PaymentRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\PlantDiaryEntryRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\PlantDiaryRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\PlantRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\RefreshTokenRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\RegisterRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\ResetPasswordRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\ReviewRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\RoleRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\UpdateProfileRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\UserRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\VerifyEmailRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\VerifyOtpRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\WishlistItemRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\request\WishlistRequestDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\AdminCategoryResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\AdminChartDataResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\AdminDashboardResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\AdminNurseryActivityResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\AdminPlantStatisticsResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\AdminTopSellingPlantResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\AnnouncementResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\AuthResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\CartItemResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\CartResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\CategoryResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\ConsultationResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\DiseaseHistoryResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\InventoryResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\NotificationResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\NurseryResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\OrderItemResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\OrderResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\PageResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\PaymentResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\PlantDiaryEntryResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\PlantDiaryResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\PlantResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\ReviewResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\RoleResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\UserResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\WishlistItemResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\dto\response\WishlistResponseDto.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\Announcement.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\BaseEntity.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\Cart.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\CartItem.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\Category.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\Consultation.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\DiseaseHistory.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\enums\ConsultationStatus.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\enums\DiseaseSeverity.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\enums\NotificationType.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\enums\NurseryApprovalStatus.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\enums\OrderStatus.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\enums\PaymentStatus.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\enums\PlantType.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\enums\UserApprovalStatus.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\enums\UserRole.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\Inventory.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\Notification.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\Nursery.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\Order.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\OrderItem.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\Payment.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\Plant.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\PlantDiary.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\PlantDiaryEntry.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\Review.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\Role.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\User.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\Wishlist.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\entity\WishlistItem.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\exception\APIException.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\exception\GlobalExceptionHandler.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\exception\ResourceNotFoundException.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\GoGreenAiApplication.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\AdminMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\AnnouncementMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\CartItemMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\CartMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\CategoryMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\ConsultationMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\DiseaseHistoryMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\InventoryMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\MapperConfigBase.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\NotificationMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\NurseryMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\OrderItemMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\OrderMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\PaymentMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\PlantDiaryEntryMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\PlantDiaryMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\PlantMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\ReviewMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\RoleMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\UserMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\WishlistItemMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\mapper\WishlistMapper.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\AnnouncementRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\CartItemRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\CartRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\CategoryRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\ConsultationRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\DiseaseHistoryRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\InventoryRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\NotificationRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\NurseryRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\OrderItemRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\OrderRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\PaymentRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\PlantDiaryEntryRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\PlantDiaryRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\PlantRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\ReviewRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\RoleRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\UserRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\WishlistItemRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\repository\WishlistRepository.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\security\CustomUserDetailsService.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\security\JwtAuthenticationEntryPoint.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\security\JwtAuthenticationFilter.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\security\JwtTokenProvider.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\security\SecurityConfig.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\service\AdminService.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\service\AuthService.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\service\impl\AdminServiceImpl.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\service\impl\AuthServiceImpl.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\service\impl\UserServiceImpl.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\service\UserService.java
-D:\Projects\Go-Green-AI\backend\src\main\java\com\gogreen\ai\util\CategorySlugGenerator.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\config\AdminDataInitializer.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\config\DevelopmentPlantDataInitializer.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\config\SwaggerConfig.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\controller\AdminController.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\controller\AuthController.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\controller\CartController.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\controller\CategoryController.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\controller\NurseryController.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\controller\OrderController.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\controller\PaymentController.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\controller\PlantController.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\controller\UserController.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\ApiResponse.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\ErrorDetails.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\JWTAuthResponse.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\LoginDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\RegisterDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\AdminCategoryRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\AdminNotificationRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\AdminUserFilterRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\AnnouncementRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\CartItemRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\CartRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\CategoryRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\ChangePasswordRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\ConsultationRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\DiseaseHistoryRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\ForgotPasswordRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\InventoryRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\LoginRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\NotificationRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\NurseryRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\OrderItemRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\OrderRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\PaymentRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\PlantDiaryEntryRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\PlantDiaryRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\PlantRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\RefreshTokenRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\RegisterRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\ResetPasswordRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\ReviewRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\RoleRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\UpdateProfileRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\UserRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\VerifyEmailRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\VerifyOtpRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\WishlistItemRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\request\WishlistRequestDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\AdminCategoryResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\AdminChartDataResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\AdminDashboardResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\AdminNurseryActivityResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\AdminPlantStatisticsResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\AdminTopSellingPlantResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\AnnouncementResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\AuthResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\CartItemResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\CartResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\CategoryResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\ConsultationResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\DiseaseHistoryResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\InventoryResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\NotificationResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\NurseryResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\OrderItemResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\OrderResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\PageResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\PaymentResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\PlantDiaryEntryResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\PlantDiaryResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\PlantResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\ReviewResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\RoleResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\UserResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\WishlistItemResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\dto\response\WishlistResponseDto.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\Announcement.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\BaseEntity.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\Cart.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\CartItem.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\Category.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\Consultation.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\DiseaseHistory.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\enums\ConsultationStatus.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\enums\DiseaseSeverity.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\enums\NotificationType.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\enums\NurseryApprovalStatus.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\enums\OrderStatus.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\enums\PaymentStatus.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\enums\PlantType.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\enums\UserApprovalStatus.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\enums\UserRole.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\Inventory.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\Notification.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\Nursery.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\Order.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\OrderItem.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\Payment.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\Plant.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\PlantDiary.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\PlantDiaryEntry.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\Review.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\Role.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\User.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\Wishlist.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\entity\WishlistItem.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\exception\APIException.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\exception\GlobalExceptionHandler.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\exception\ResourceNotFoundException.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\GoGreenAiApplication.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\AdminMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\AnnouncementMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\CartItemMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\CartMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\CategoryMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\ConsultationMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\DiseaseHistoryMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\InventoryMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\MapperConfigBase.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\NotificationMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\NurseryMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\OrderItemMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\OrderMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\PaymentMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\PlantDiaryEntryMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\PlantDiaryMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\PlantMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\ReviewMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\RoleMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\UserMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\WishlistItemMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\mapper\WishlistMapper.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\AnnouncementRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\CartItemRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\CartRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\CategoryRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\ConsultationRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\DiseaseHistoryRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\InventoryRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\NotificationRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\NurseryRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\OrderItemRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\OrderRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\PaymentRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\PlantDiaryEntryRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\PlantDiaryRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\PlantRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\ReviewRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\RoleRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\UserRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\WishlistItemRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\repository\WishlistRepository.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\security\CustomUserDetailsService.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\security\JwtAuthenticationEntryPoint.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\security\JwtAuthenticationFilter.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\security\JwtTokenProvider.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\security\SecurityConfig.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\AdminService.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\AuthService.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\CartService.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\CategoryService.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\impl\AdminServiceImpl.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\impl\AuthServiceImpl.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\impl\CartServiceImpl.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\impl\CategoryServiceImpl.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\impl\NurseryServiceImpl.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\impl\OrderServiceImpl.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\impl\PaymentServiceImpl.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\impl\PlantServiceImpl.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\impl\UserServiceImpl.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\NurseryService.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\OrderService.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\PaymentService.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\PlantService.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\service\UserService.java
+C:\Users\pujag\GoGreen AI\backend\src\main\java\com\gogreen\ai\util\CategorySlugGenerator.java

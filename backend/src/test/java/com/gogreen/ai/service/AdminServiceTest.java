@@ -1,8 +1,14 @@
 package com.gogreen.ai.service;
 
+import com.gogreen.ai.dto.request.AdminNotificationRequestDto;
+import com.gogreen.ai.dto.request.AnnouncementRequestDto;
 import com.gogreen.ai.dto.response.AdminDashboardResponseDto;
+import com.gogreen.ai.dto.response.AnnouncementResponseDto;
+import com.gogreen.ai.entity.Announcement;
 import com.gogreen.ai.entity.enums.UserRole;
+import com.gogreen.ai.exception.APIException;
 import com.gogreen.ai.mapper.AdminMapper;
+import com.gogreen.ai.mapper.AnnouncementMapper;
 import com.gogreen.ai.repository.AnnouncementRepository;
 import com.gogreen.ai.repository.CategoryRepository;
 import com.gogreen.ai.service.impl.AdminServiceImpl;
@@ -17,8 +23,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -40,6 +55,8 @@ class AdminServiceTest {
     private ReviewRepository reviewRepository;
     @Mock
     private AnnouncementRepository announcementRepository;
+    @Mock
+    private AnnouncementMapper announcementMapper;
     @Mock
     private AdminMapper adminMapper;
 
@@ -90,5 +107,138 @@ class AdminServiceTest {
         assertEquals(1L, dashboard.getPendingNurseryApprovals());
         assertEquals(1L, dashboard.getPendingExpertApprovals());
         assertEquals(1L, dashboard.getPendingDeliveryPartnerApprovals());
+    }
+
+    @Test
+    void shouldSendAnnouncement() {
+        AdminNotificationRequestDto requestDto = new AdminNotificationRequestDto();
+        requestDto.setTitle("Plant Sale");
+        requestDto.setMessage("Huge discounts this weekend!");
+
+        adminService.sendAnnouncement(requestDto);
+
+        verify(announcementRepository).save(any(Announcement.class));
+    }
+
+    @Test
+    void shouldGetAllAnnouncements() {
+        Announcement announcement = new Announcement();
+        announcement.setTitle("Title");
+        announcement.setMessage("Msg");
+
+        AnnouncementResponseDto responseDto = new AnnouncementResponseDto();
+        responseDto.setTitle("Title");
+        responseDto.setMessage("Msg");
+
+        when(announcementRepository.findAll()).thenReturn(List.of(announcement));
+        when(announcementMapper.toResponseDtoList(List.of(announcement))).thenReturn(List.of(responseDto));
+
+        List<AnnouncementResponseDto> result = adminService.getAnnouncements();
+
+        assertEquals(1, result.size());
+        assertEquals("Title", result.get(0).getTitle());
+    }
+
+    @Test
+    void shouldGetAnnouncementById() {
+        UUID id = UUID.randomUUID();
+        Announcement announcement = new Announcement();
+        announcement.setId(id);
+        announcement.setTitle("Title");
+
+        AnnouncementResponseDto responseDto = new AnnouncementResponseDto();
+        responseDto.setId(id);
+        responseDto.setTitle("Title");
+
+        when(announcementRepository.findById(id)).thenReturn(Optional.of(announcement));
+        when(announcementMapper.toResponseDto(announcement)).thenReturn(responseDto);
+
+        AnnouncementResponseDto result = adminService.getAnnouncementById(id);
+
+        assertNotNull(result);
+        assertEquals(id, result.getId());
+    }
+
+    @Test
+    void shouldThrowNotFoundWhenGettingNonExistentAnnouncementById() {
+        UUID id = UUID.randomUUID();
+        when(announcementRepository.findById(id)).thenReturn(Optional.empty());
+
+        APIException exception = assertThrows(APIException.class, () -> adminService.getAnnouncementById(id));
+
+        assertEquals(HttpStatus.NOT_FOUND, exception.getStatus());
+        assertEquals("Announcement not found", exception.getMessage());
+    }
+
+    @Test
+    void shouldCreateAnnouncement() {
+        AnnouncementRequestDto requestDto = new AnnouncementRequestDto();
+        requestDto.setTitle("New Announcement");
+        requestDto.setMessage("New Message");
+        requestDto.setActive(true);
+
+        Announcement announcement = new Announcement();
+        announcement.setTitle("New Announcement");
+        announcement.setMessage("New Message");
+        announcement.setActive(true);
+
+        AnnouncementResponseDto responseDto = new AnnouncementResponseDto();
+        responseDto.setTitle("New Announcement");
+        responseDto.setMessage("New Message");
+        responseDto.setActive(true);
+
+        when(announcementMapper.toEntity(requestDto)).thenReturn(announcement);
+        when(announcementRepository.save(announcement)).thenReturn(announcement);
+        when(announcementMapper.toResponseDto(announcement)).thenReturn(responseDto);
+
+        AnnouncementResponseDto result = adminService.createAnnouncement(requestDto);
+
+        assertNotNull(result);
+        assertEquals("New Announcement", result.getTitle());
+        verify(announcementRepository).save(announcement);
+    }
+
+    @Test
+    void shouldUpdateAnnouncement() {
+        UUID id = UUID.randomUUID();
+        AnnouncementRequestDto requestDto = new AnnouncementRequestDto();
+        requestDto.setTitle("Updated Title");
+        requestDto.setMessage("Updated Message");
+        requestDto.setActive(false);
+
+        Announcement announcement = new Announcement();
+        announcement.setId(id);
+        announcement.setTitle("Old Title");
+        announcement.setMessage("Old Message");
+        announcement.setActive(true);
+
+        AnnouncementResponseDto responseDto = new AnnouncementResponseDto();
+        responseDto.setId(id);
+        responseDto.setTitle("Updated Title");
+        responseDto.setMessage("Updated Message");
+        responseDto.setActive(false);
+
+        when(announcementRepository.findById(id)).thenReturn(Optional.of(announcement));
+        when(announcementRepository.save(announcement)).thenReturn(announcement);
+        when(announcementMapper.toResponseDto(announcement)).thenReturn(responseDto);
+
+        AnnouncementResponseDto result = adminService.updateAnnouncement(id, requestDto);
+
+        assertNotNull(result);
+        assertEquals("Updated Title", result.getTitle());
+        verify(announcementRepository).save(announcement);
+    }
+
+    @Test
+    void shouldDeleteAnnouncement() {
+        UUID id = UUID.randomUUID();
+        Announcement announcement = new Announcement();
+        announcement.setId(id);
+
+        when(announcementRepository.findById(id)).thenReturn(Optional.of(announcement));
+
+        adminService.deleteAnnouncement(id);
+
+        verify(announcementRepository).delete(announcement);
     }
 }

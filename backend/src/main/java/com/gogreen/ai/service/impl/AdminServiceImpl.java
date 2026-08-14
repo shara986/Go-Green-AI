@@ -519,7 +519,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     @Transactional
     public void sendAnnouncement(AdminNotificationRequestDto requestDto) {
-        // announcements are persisted via the dedicated announcement module
+        Announcement announcement = new Announcement();
+        announcement.setTitle(requestDto.getTitle());
+        announcement.setMessage(requestDto.getMessage());
+        announcement.setActive(true);
+        announcementRepository.save(announcement);
     }
 
     @Override

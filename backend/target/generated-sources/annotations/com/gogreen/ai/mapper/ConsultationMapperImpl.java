@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-08-10T19:23:47+0530",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
+    date = "2026-08-12T15:06:18+0530",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.12 (Oracle Corporation)"
 )
 @Component
 public class ConsultationMapperImpl implements ConsultationMapper {
@@ -30,14 +30,14 @@ public class ConsultationMapperImpl implements ConsultationMapper {
         consultationResponseDto.setUserName( consultationUserName( consultation ) );
         consultationResponseDto.setExpertId( consultationExpertId( consultation ) );
         consultationResponseDto.setExpertName( consultationExpertName( consultation ) );
-        consultationResponseDto.setCreatedAt( consultation.getCreatedAt() );
-        consultationResponseDto.setDurationMinutes( consultation.getDurationMinutes() );
         consultationResponseDto.setId( consultation.getId() );
-        consultationResponseDto.setMeetingLink( consultation.getMeetingLink() );
-        consultationResponseDto.setNotes( consultation.getNotes() );
-        consultationResponseDto.setScheduledAt( consultation.getScheduledAt() );
-        consultationResponseDto.setStatus( consultation.getStatus() );
         consultationResponseDto.setSubject( consultation.getSubject() );
+        consultationResponseDto.setStatus( consultation.getStatus() );
+        consultationResponseDto.setScheduledAt( consultation.getScheduledAt() );
+        consultationResponseDto.setDurationMinutes( consultation.getDurationMinutes() );
+        consultationResponseDto.setNotes( consultation.getNotes() );
+        consultationResponseDto.setMeetingLink( consultation.getMeetingLink() );
+        consultationResponseDto.setCreatedAt( consultation.getCreatedAt() );
         consultationResponseDto.setUpdatedAt( consultation.getUpdatedAt() );
 
         return consultationResponseDto;
@@ -65,12 +65,12 @@ public class ConsultationMapperImpl implements ConsultationMapper {
 
         Consultation consultation = new Consultation();
 
-        consultation.setDurationMinutes( dto.getDurationMinutes() );
-        consultation.setMeetingLink( dto.getMeetingLink() );
-        consultation.setNotes( dto.getNotes() );
-        consultation.setScheduledAt( dto.getScheduledAt() );
-        consultation.setStatus( dto.getStatus() );
         consultation.setSubject( dto.getSubject() );
+        consultation.setStatus( dto.getStatus() );
+        consultation.setScheduledAt( dto.getScheduledAt() );
+        consultation.setDurationMinutes( dto.getDurationMinutes() );
+        consultation.setNotes( dto.getNotes() );
+        consultation.setMeetingLink( dto.getMeetingLink() );
 
         return consultation;
     }

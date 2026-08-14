@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-08-10T19:23:47+0530",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
+    date = "2026-08-12T15:06:18+0530",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.12 (Oracle Corporation)"
 )
 @Component
 public class PaymentMapperImpl implements PaymentMapper {
@@ -28,12 +28,12 @@ public class PaymentMapperImpl implements PaymentMapper {
 
         paymentResponseDto.setOrderId( paymentOrderId( payment ) );
         paymentResponseDto.setOrderNumber( paymentOrderOrderNumber( payment ) );
-        paymentResponseDto.setAmount( payment.getAmount() );
-        paymentResponseDto.setCreatedAt( payment.getCreatedAt() );
         paymentResponseDto.setId( payment.getId() );
-        paymentResponseDto.setPaymentMethod( payment.getPaymentMethod() );
+        paymentResponseDto.setAmount( payment.getAmount() );
         paymentResponseDto.setStatus( payment.getStatus() );
+        paymentResponseDto.setPaymentMethod( payment.getPaymentMethod() );
         paymentResponseDto.setTransactionId( payment.getTransactionId() );
+        paymentResponseDto.setCreatedAt( payment.getCreatedAt() );
         paymentResponseDto.setUpdatedAt( payment.getUpdatedAt() );
 
         return paymentResponseDto;
@@ -62,8 +62,8 @@ public class PaymentMapperImpl implements PaymentMapper {
         Payment payment = new Payment();
 
         payment.setAmount( dto.getAmount() );
-        payment.setPaymentMethod( dto.getPaymentMethod() );
         payment.setStatus( dto.getStatus() );
+        payment.setPaymentMethod( dto.getPaymentMethod() );
         payment.setTransactionId( dto.getTransactionId() );
 
         return payment;

@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-08-10T19:18:51+0530",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
+    date = "2026-08-12T15:06:18+0530",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.12 (Oracle Corporation)"
 )
 @Component
 public class AnnouncementMapperImpl implements AnnouncementMapper {
@@ -24,11 +24,11 @@ public class AnnouncementMapperImpl implements AnnouncementMapper {
 
         AnnouncementResponseDto announcementResponseDto = new AnnouncementResponseDto();
 
+        announcementResponseDto.setId( announcement.getId() );
+        announcementResponseDto.setTitle( announcement.getTitle() );
+        announcementResponseDto.setMessage( announcement.getMessage() );
         announcementResponseDto.setActive( announcement.isActive() );
         announcementResponseDto.setCreatedAt( announcement.getCreatedAt() );
-        announcementResponseDto.setId( announcement.getId() );
-        announcementResponseDto.setMessage( announcement.getMessage() );
-        announcementResponseDto.setTitle( announcement.getTitle() );
         announcementResponseDto.setUpdatedAt( announcement.getUpdatedAt() );
 
         return announcementResponseDto;
@@ -56,11 +56,11 @@ public class AnnouncementMapperImpl implements AnnouncementMapper {
 
         Announcement announcement = new Announcement();
 
+        announcement.setTitle( dto.getTitle() );
+        announcement.setMessage( dto.getMessage() );
         if ( dto.getActive() != null ) {
             announcement.setActive( dto.getActive() );
         }
-        announcement.setMessage( dto.getMessage() );
-        announcement.setTitle( dto.getTitle() );
 
         return announcement;
     }
