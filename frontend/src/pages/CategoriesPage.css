@@ -1,0 +1,216 @@
+.categories-page {
+  background-color: var(--bg-page);
+  min-height: calc(100vh - 80px);
+}
+
+.categories-hero {
+  padding: 60px 0 40px 0;
+  background: linear-gradient(180deg, #F8FAF9 0%, #E8F5E9 100%);
+  text-align: center;
+}
+
+.categories-hero-content {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.categories-hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--dark-forest);
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.categories-hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.categories-body {
+  padding: 50px 0 80px 0;
+}
+
+.categories-error-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FEE2E2;
+  border: 1px solid #FCA5A5;
+  color: #991B1B;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  margin-bottom: 30px;
+  font-weight: 500;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.category-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 32px 26px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-accent);
+}
+
+.cat-card-header {
+  margin-bottom: 20px;
+}
+
+.cat-icon-wrapper {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-md);
+  background-color: var(--soft-mint);
+  color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: var(--transition-fast);
+}
+
+.category-card:hover .cat-icon-wrapper {
+  background-color: var(--primary-green);
+  color: #ffffff;
+}
+
+.cat-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--dark-forest);
+  margin-bottom: 10px;
+}
+
+.cat-desc {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.cat-footer {
+  border-top: 1px dashed var(--border-light);
+  padding-top: 16px;
+}
+
+.btn-explore-cat {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  cursor: pointer;
+  padding: 0;
+  transition: var(--transition-fast);
+}
+
+.category-card:hover .btn-explore-cat {
+  color: var(--primary-green);
+}
+
+.arrow-icon {
+  transition: transform 0.2s ease;
+}
+
+.category-card:hover .arrow-icon {
+  transform: translateX(4px);
+}
+
+/* Skeleton Loading */
+.skeleton-card {
+  pointer-events: none;
+}
+
+.skeleton-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(90deg, #F3F4F6 25%, #E5E7EB 50%, #F3F4F6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  margin-bottom: 20px;
+}
+
+.skeleton-line {
+  height: 14px;
+  background: linear-gradient(90deg, #F3F4F6 25%, #E5E7EB 50%, #F3F4F6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.skeleton-line.short { width: 50%; }
+.skeleton-line.long { width: 90%; }
+.skeleton-line.medium { width: 70%; }
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Empty State */
+.categories-empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px dashed var(--border-light);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.categories-empty-state .empty-icon {
+  font-size: 48px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.categories-empty-state h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--dark-forest);
+  margin-bottom: 8px;
+}
+
+.categories-empty-state p {
+  color: var(--text-muted);
+}
+
+@media (max-width: 1024px) {
+  .categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+}

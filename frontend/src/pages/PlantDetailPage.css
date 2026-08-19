@@ -1,0 +1,236 @@
+.plant-detail-page {
+  background-color: var(--bg-page);
+  padding: 40px 0 80px 0;
+  min-height: calc(100vh - 80px);
+}
+
+.back-link-bar {
+  margin-bottom: 24px;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1px solid var(--border-light);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-back:hover {
+  background-color: var(--light-mint);
+  color: var(--primary-dark);
+  border-color: var(--primary-accent);
+}
+
+.plant-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-md);
+}
+
+/* Left Image Panel */
+.detail-image-card {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--light-mint);
+}
+
+.detail-main-img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  display: block;
+}
+
+.detail-availability-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+}
+
+.detail-availability-badge.in-stock {
+  background-color: #D1FAE5;
+  color: #065F46;
+}
+
+.detail-availability-badge.out-of-stock {
+  background-color: #FEE2E2;
+  color: #991B1B;
+}
+
+/* Right Info Panel */
+.detail-info-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-category-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--soft-mint);
+  color: var(--primary-dark);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: 12px;
+  width: fit-content;
+}
+
+.detail-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--dark-forest);
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+
+.detail-scientific {
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.detail-price-box {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 24px;
+}
+
+.detail-price {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+}
+
+.detail-sku {
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.detail-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--bg-page);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+.meta-icon {
+  font-size: 20px;
+  color: var(--primary-green);
+}
+
+.meta-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.meta-val {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--dark-forest);
+}
+
+.detail-section-block {
+  margin-bottom: 24px;
+}
+
+.detail-section-block h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--dark-forest);
+  margin-bottom: 8px;
+}
+
+.detail-description {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.care-instructions-box {
+  background-color: var(--light-mint);
+  border: 1px solid rgba(82, 183, 136, 0.3);
+  padding: 20px;
+  border-radius: var(--radius-md);
+}
+
+.care-text {
+  font-size: 0.95rem;
+  color: var(--primary-dark);
+  line-height: 1.6;
+}
+
+/* Loading & Error States */
+.plant-detail-loading, .plant-detail-error {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.plant-detail-error .error-icon {
+  font-size: 48px;
+  color: #EF4444;
+  margin-bottom: 16px;
+}
+
+.plant-detail-error h2 {
+  font-size: 1.75rem;
+  color: var(--dark-forest);
+  margin-bottom: 8px;
+}
+
+.plant-detail-error p {
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+@media (max-width: 992px) {
+  .plant-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 24px;
+  }
+  .detail-main-img {
+    height: 360px;
+  }
+}

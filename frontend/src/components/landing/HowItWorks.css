@@ -1,0 +1,61 @@
+.how-section {
+  padding: 90px 0;
+  background-color: var(--bg-page);
+}
+
+.how-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.how-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  position: relative;
+}
+
+.how-step-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 36px 28px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.how-step-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--primary-accent);
+  box-shadow: var(--shadow-lg);
+}
+
+.step-num {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--primary-accent);
+  opacity: 0.8;
+  margin-bottom: 14px;
+  font-family: monospace;
+}
+
+.step-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--dark-forest);
+  margin-bottom: 10px;
+}
+
+.step-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 992px) {
+  .how-steps-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,2 +1,8 @@
 com\gogreen\ai\service\AdminServiceTest.class
+com\gogreen\ai\service\PaymentServiceTest.class
+com\gogreen\ai\service\CategoryServiceTest.class
 com\gogreen\ai\config\AdminDataInitializerTest.class
+com\gogreen\ai\service\CartServiceTest.class
+com\gogreen\ai\service\NurseryServiceTest.class
+com\gogreen\ai\service\PlantServiceTest.class
+com\gogreen\ai\service\OrderServiceTest.class
