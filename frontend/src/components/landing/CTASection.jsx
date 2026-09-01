@@ -1,9 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FiArrowRight } from 'react-icons/fi';
 import './CTASection.css';
+import { useAuth } from '../../context/AuthContext';
 
 const CTASection = () => {
+  const { isAuthenticated, getDashboardPath } = useAuth();
+  const navigate = useNavigate();
+
+  const handleGetStarted = (e) => {
+    e.preventDefault();
+    if (isAuthenticated && getDashboardPath) {
+      navigate(getDashboardPath());
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
     <section className="cta-section">
       <div className="container">
@@ -13,9 +26,9 @@ const CTASection = () => {
             Join GoGreen AI and start your greener journey today.
           </p>
           <div className="cta-actions">
-            <Link to="/login" className="btn-cta-main">
+            <button onClick={handleGetStarted} className="btn-cta-main" style={{ cursor: 'pointer' }}>
               Get Started <FiArrowRight />
-            </Link>
+            </button>
           </div>
         </div>
       </div>

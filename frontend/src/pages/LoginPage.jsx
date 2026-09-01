@@ -70,17 +70,31 @@ const LoginPage = () => {
 
         // Role-based navigation
         const userRoles = authData.user?.roles || [];
-        const isUserAdmin = Array.isArray(userRoles)
-          ? userRoles.includes('ROLE_ADMIN')
-          : (userRoles instanceof Set ? userRoles.has('ROLE_ADMIN') : false);
+        const hasRole = (role) =>
+          Array.isArray(userRoles)
+            ? userRoles.includes(role)
+            : userRoles instanceof Set
+            ? userRoles.has(role)
+            : false;
 
-        if (redirectPath && !isUserAdmin) {
-          navigate(redirectPath);
-        } else if (isUserAdmin) {
-          navigate('/admin/dashboard');
+        const isUserAdmin = hasRole('ROLE_ADMIN');
+        const isNurseryOwner = hasRole('ROLE_NURSERY_OWNER');
+        const isCustomer = hasRole('ROLE_CUSTOMER');
+
+        let destination;
+        if (isUserAdmin) {
+          destination = '/admin/dashboard';
+        } else if (isNurseryOwner) {
+          destination = '/nursery/dashboard';
+        } else if (isCustomer) {
+          destination = '/customer/dashboard';
+        } else if (redirectPath) {
+          destination = redirectPath;
         } else {
-          navigate('/');
+          destination = '/';
         }
+
+        navigate(destination);
       } else {
         setErrorMessage('Invalid response format from server.');
       }

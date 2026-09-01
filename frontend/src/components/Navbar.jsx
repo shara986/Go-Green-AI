@@ -11,44 +11,44 @@ const LeafIcon = ({ size = 20, className = '' }) => (
   </svg>
 );
 
-
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAuthenticated, user, logout, isAdmin } = useAuth();
+  const { isAuthenticated, user, logout, isAdmin, getDashboardPath } = useAuth();
 
-  // Close mobile menu when changing routes
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [location.pathname]);
+  useEffect(() => { setMenuOpen(false); }, [location.pathname]);
 
-  // Handle sticky navbar background on scroll
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
+  // Always-visible public links
+  const publicNavLinks = [
     { name: 'Home', to: '/' },
-    { name: 'Plants', to: '/plants' },
-    { name: 'Categories', to: '/categories' },
     { name: 'About', to: '/about' },
     { name: 'Contact', to: '/contact' },
   ];
 
-  const handleLogout = () => {
-    logout();
-    navigate('/');
+  // Visible in navbar but require auth — redirect to /login if not authenticated
+  const protectedNavLinks = [
+    { name: 'Plants', to: '/plants' },
+    { name: 'Categories', to: '/categories' },
+  ];
+
+  const handleLogout = () => { logout(); navigate('/'); };
+
+  const handleProtectedClick = (e, to) => {
+    if (!isAuthenticated) {
+      e.preventDefault();
+      navigate(`/login?redirect=${encodeURIComponent(to)}`);
+    }
   };
+
+  const dashboardPath = isAuthenticated && getDashboardPath ? getDashboardPath() : '/login';
 
   return (
     <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
@@ -62,10 +62,20 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <nav className="nav-links desktop">
-          {navLinks.map((link) => (
+          {publicNavLinks.map((link) => (
             <NavLink
               key={link.name}
               to={link.to}
+              className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
+            >
+              {link.name}
+            </NavLink>
+          ))}
+          {protectedNavLinks.map((link) => (
+            <NavLink
+              key={link.name}
+              to={link.to}
+              onClick={(e) => handleProtectedClick(e, link.to)}
               className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
             >
               {link.name}
@@ -77,11 +87,9 @@ const Navbar = () => {
         <div className="auth-section desktop">
           {isAuthenticated ? (
             <div className="user-profile-menu">
-              {isAdmin && (
-                <Link to="/admin/dashboard" className="admin-badge">
-                  <FiLayout /> Admin
-                </Link>
-              )}
+              <Link to={dashboardPath} className="admin-badge">
+                <FiLayout /> Dashboard
+              </Link>
               <span className="user-greeting">
                 <FiUser className="user-icon" /> {user?.name || user?.username || 'User'}
               </span>
@@ -91,12 +99,8 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="auth-buttons">
-              <Link to="/login" className="nav-login-btn">
-                Login
-              </Link>
-              <Link to="/register" className="btn-primary nav-register-btn">
-                Register
-              </Link>
+              <Link to="/login" className="nav-login-btn">Login</Link>
+              <Link to="/register" className="btn-primary nav-register-btn">Register</Link>
             </div>
           )}
         </div>
@@ -114,10 +118,20 @@ const Navbar = () => {
       {/* Mobile Menu Drawer */}
       <div className={`mobile-drawer ${menuOpen ? 'open' : ''}`}>
         <nav className="mobile-nav-links">
-          {navLinks.map((link) => (
+          {publicNavLinks.map((link) => (
             <NavLink
               key={link.name}
               to={link.to}
+              className={({ isActive }) => (isActive ? 'mobile-nav-item active' : 'mobile-nav-item')}
+            >
+              {link.name}
+            </NavLink>
+          ))}
+          {protectedNavLinks.map((link) => (
+            <NavLink
+              key={link.name}
+              to={link.to}
+              onClick={(e) => handleProtectedClick(e, link.to)}
               className={({ isActive }) => (isActive ? 'mobile-nav-item active' : 'mobile-nav-item')}
             >
               {link.name}
@@ -132,18 +146,21 @@ const Navbar = () => {
                 <FiUser /> {user?.name || user?.username || 'User'}
                 {isAdmin && <span className="mobile-admin-tag">Admin</span>}
               </div>
+              <Link
+                to={dashboardPath}
+                className="btn-primary full-width"
+                style={{ marginBottom: 8, display: 'flex', justifyContent: 'center', gap: 6 }}
+              >
+                <FiLayout /> Dashboard
+              </Link>
               <button onClick={handleLogout} className="btn-logout mobile-logout">
                 <FiLogOut /> Logout
               </button>
             </div>
           ) : (
             <div className="mobile-auth-btns">
-              <Link to="/login" className="btn-secondary full-width">
-                Login
-              </Link>
-              <Link to="/register" className="btn-primary full-width">
-                Register
-              </Link>
+              <Link to="/login" className="btn-secondary full-width">Login</Link>
+              <Link to="/register" className="btn-primary full-width">Register</Link>
             </div>
           )}
         </div>

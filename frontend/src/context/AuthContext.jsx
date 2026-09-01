@@ -51,12 +51,37 @@ export const AuthProvider = ({ children }) => {
 
   const isAuthenticated = Boolean(auth.accessToken);
   const userRoles = auth.user?.roles || [];
-  const isAdmin = Array.isArray(userRoles) 
-    ? userRoles.includes('ROLE_ADMIN') 
-    : (userRoles instanceof Set ? userRoles.has('ROLE_ADMIN') : false);
+
+  const hasRole = (role) =>
+    Array.isArray(userRoles)
+      ? userRoles.includes(role)
+      : userRoles instanceof Set
+      ? userRoles.has(role)
+      : false;
+
+  const isAdmin = hasRole('ROLE_ADMIN');
+  const isNurseryOwner = hasRole('ROLE_NURSERY_OWNER');
+  const isCustomer = hasRole('ROLE_CUSTOMER');
+
+  const getDashboardPath = () => {
+    if (isAdmin) return '/admin/dashboard';
+    if (isNurseryOwner) return '/nursery/dashboard';
+    return '/customer/dashboard';
+  };
 
   return (
-    <AuthContext.Provider value={{ ...auth, login, logout, isAuthenticated, isAdmin }}>
+    <AuthContext.Provider
+      value={{
+        ...auth,
+        login,
+        logout,
+        isAuthenticated,
+        isAdmin,
+        isNurseryOwner,
+        isCustomer,
+        getDashboardPath,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

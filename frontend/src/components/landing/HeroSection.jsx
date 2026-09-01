@@ -1,10 +1,32 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FiArrowRight, FiCpu, FiCheckCircle } from 'react-icons/fi';
 import './HeroSection.css';
 import hero3dImg from '../../assets/hero_3d_plant.png';
+import { useAuth } from '../../context/AuthContext';
 
 const HeroSection = () => {
+  const { isAuthenticated, getDashboardPath } = useAuth();
+  const navigate = useNavigate();
+
+  const handleExplorePlants = (e) => {
+    e.preventDefault();
+    if (isAuthenticated) {
+      navigate('/plants');
+    } else {
+      navigate('/login?redirect=' + encodeURIComponent('/plants'));
+    }
+  };
+
+  const handleGetStarted = (e) => {
+    e.preventDefault();
+    if (isAuthenticated && getDashboardPath) {
+      navigate(getDashboardPath());
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
     <section className="hero-section">
       <div className="container hero-container">
@@ -21,12 +43,12 @@ const HeroSection = () => {
           </p>
           
           <div className="hero-actions">
-            <a href="#categories" className="btn-primary hero-btn-main">
+            <button onClick={handleExplorePlants} className="btn-primary hero-btn-main" style={{ cursor: 'pointer' }}>
               Explore Plants <FiArrowRight />
-            </a>
-            <Link to="/login" className="btn-secondary hero-btn-sub">
+            </button>
+            <button onClick={handleGetStarted} className="btn-secondary hero-btn-sub" style={{ cursor: 'pointer' }}>
               Get Started
-            </Link>
+            </button>
           </div>
 
           <div className="hero-trust-bullets">
