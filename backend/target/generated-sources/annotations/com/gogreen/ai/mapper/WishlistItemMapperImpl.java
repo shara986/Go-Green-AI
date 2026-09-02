@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-09-01T23:00:34+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 25.0.2 (Oracle Corporation)"
+    date = "2026-09-02T07:58:26+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class WishlistItemMapperImpl implements WishlistItemMapper {
@@ -31,8 +31,8 @@ public class WishlistItemMapperImpl implements WishlistItemMapper {
         wishlistItemResponseDto.setPlantId( wishlistItemPlantId( wishlistItem ) );
         wishlistItemResponseDto.setPlantName( wishlistItemPlantName( wishlistItem ) );
         wishlistItemResponseDto.setPlantPrice( wishlistItemPlantPrice( wishlistItem ) );
-        wishlistItemResponseDto.setId( wishlistItem.getId() );
         wishlistItemResponseDto.setCreatedAt( wishlistItem.getCreatedAt() );
+        wishlistItemResponseDto.setId( wishlistItem.getId() );
         wishlistItemResponseDto.setUpdatedAt( wishlistItem.getUpdatedAt() );
 
         return wishlistItemResponseDto;

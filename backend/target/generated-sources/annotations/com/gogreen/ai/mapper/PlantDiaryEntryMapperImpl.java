@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-09-01T23:00:35+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 25.0.2 (Oracle Corporation)"
+    date = "2026-09-02T07:58:26+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class PlantDiaryEntryMapperImpl implements PlantDiaryEntryMapper {
@@ -27,11 +27,11 @@ public class PlantDiaryEntryMapperImpl implements PlantDiaryEntryMapper {
         PlantDiaryEntryResponseDto plantDiaryEntryResponseDto = new PlantDiaryEntryResponseDto();
 
         plantDiaryEntryResponseDto.setDiaryId( entryDiaryId( entry ) );
-        plantDiaryEntryResponseDto.setId( entry.getId() );
+        plantDiaryEntryResponseDto.setCreatedAt( entry.getCreatedAt() );
         plantDiaryEntryResponseDto.setEntryDate( entry.getEntryDate() );
+        plantDiaryEntryResponseDto.setId( entry.getId() );
         plantDiaryEntryResponseDto.setNote( entry.getNote() );
         plantDiaryEntryResponseDto.setPhotoUrl( entry.getPhotoUrl() );
-        plantDiaryEntryResponseDto.setCreatedAt( entry.getCreatedAt() );
         plantDiaryEntryResponseDto.setUpdatedAt( entry.getUpdatedAt() );
 
         return plantDiaryEntryResponseDto;

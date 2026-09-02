@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-09-01T23:00:34+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 25.0.2 (Oracle Corporation)"
+    date = "2026-09-02T07:58:26+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class NotificationMapperImpl implements NotificationMapper {
@@ -27,13 +27,13 @@ public class NotificationMapperImpl implements NotificationMapper {
         NotificationResponseDto notificationResponseDto = new NotificationResponseDto();
 
         notificationResponseDto.setUserId( notificationUserId( notification ) );
+        notificationResponseDto.setCreatedAt( notification.getCreatedAt() );
         notificationResponseDto.setId( notification.getId() );
-        notificationResponseDto.setType( notification.getType() );
-        notificationResponseDto.setTitle( notification.getTitle() );
         notificationResponseDto.setMessage( notification.getMessage() );
         notificationResponseDto.setRead( notification.isRead() );
         notificationResponseDto.setReadAt( notification.getReadAt() );
-        notificationResponseDto.setCreatedAt( notification.getCreatedAt() );
+        notificationResponseDto.setTitle( notification.getTitle() );
+        notificationResponseDto.setType( notification.getType() );
         notificationResponseDto.setUpdatedAt( notification.getUpdatedAt() );
 
         return notificationResponseDto;
@@ -61,10 +61,10 @@ public class NotificationMapperImpl implements NotificationMapper {
 
         Notification notification = new Notification();
 
-        notification.setType( dto.getType() );
-        notification.setTitle( dto.getTitle() );
         notification.setMessage( dto.getMessage() );
         notification.setRead( dto.isRead() );
+        notification.setTitle( dto.getTitle() );
+        notification.setType( dto.getType() );
 
         return notification;
     }

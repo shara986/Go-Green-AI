@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-09-01T23:00:34+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 25.0.2 (Oracle Corporation)"
+    date = "2026-09-02T07:58:26+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class InventoryMapperImpl implements InventoryMapper {
@@ -28,12 +28,12 @@ public class InventoryMapperImpl implements InventoryMapper {
 
         inventoryResponseDto.setPlantId( inventoryPlantId( inventory ) );
         inventoryResponseDto.setPlantName( inventoryPlantName( inventory ) );
-        inventoryResponseDto.setId( inventory.getId() );
-        inventoryResponseDto.setStockLevel( inventory.getStockLevel() );
-        inventoryResponseDto.setReservedQuantity( inventory.getReservedQuantity() );
-        inventoryResponseDto.setReorderLevel( inventory.getReorderLevel() );
-        inventoryResponseDto.setLastRestockDate( inventory.getLastRestockDate() );
         inventoryResponseDto.setCreatedAt( inventory.getCreatedAt() );
+        inventoryResponseDto.setId( inventory.getId() );
+        inventoryResponseDto.setLastRestockDate( inventory.getLastRestockDate() );
+        inventoryResponseDto.setReorderLevel( inventory.getReorderLevel() );
+        inventoryResponseDto.setReservedQuantity( inventory.getReservedQuantity() );
+        inventoryResponseDto.setStockLevel( inventory.getStockLevel() );
         inventoryResponseDto.setUpdatedAt( inventory.getUpdatedAt() );
 
         return inventoryResponseDto;
@@ -61,10 +61,10 @@ public class InventoryMapperImpl implements InventoryMapper {
 
         Inventory inventory = new Inventory();
 
-        inventory.setStockLevel( dto.getStockLevel() );
-        inventory.setReservedQuantity( dto.getReservedQuantity() );
-        inventory.setReorderLevel( dto.getReorderLevel() );
         inventory.setLastRestockDate( dto.getLastRestockDate() );
+        inventory.setReorderLevel( dto.getReorderLevel() );
+        inventory.setReservedQuantity( dto.getReservedQuantity() );
+        inventory.setStockLevel( dto.getStockLevel() );
 
         return inventory;
     }

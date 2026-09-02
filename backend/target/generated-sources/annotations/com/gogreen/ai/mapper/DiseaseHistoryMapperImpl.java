@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-09-01T23:00:33+0530",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 25.0.2 (Oracle Corporation)"
+    date = "2026-09-02T07:58:26+0530",
+    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
 )
 @Component
 public class DiseaseHistoryMapperImpl implements DiseaseHistoryMapper {
@@ -27,15 +27,15 @@ public class DiseaseHistoryMapperImpl implements DiseaseHistoryMapper {
         DiseaseHistoryResponseDto diseaseHistoryResponseDto = new DiseaseHistoryResponseDto();
 
         diseaseHistoryResponseDto.setUserId( diseaseHistoryUserId( diseaseHistory ) );
-        diseaseHistoryResponseDto.setId( diseaseHistory.getId() );
-        diseaseHistoryResponseDto.setPlantName( diseaseHistory.getPlantName() );
-        diseaseHistoryResponseDto.setDiseaseIdentified( diseaseHistory.getDiseaseIdentified() );
-        diseaseHistoryResponseDto.setDateIdentified( diseaseHistory.getDateIdentified() );
-        diseaseHistoryResponseDto.setSeverity( diseaseHistory.getSeverity() );
         diseaseHistoryResponseDto.setConfidenceScore( diseaseHistory.getConfidenceScore() );
-        diseaseHistoryResponseDto.setRecommendedAction( diseaseHistory.getRecommendedAction() );
-        diseaseHistoryResponseDto.setImageUrl( diseaseHistory.getImageUrl() );
         diseaseHistoryResponseDto.setCreatedAt( diseaseHistory.getCreatedAt() );
+        diseaseHistoryResponseDto.setDateIdentified( diseaseHistory.getDateIdentified() );
+        diseaseHistoryResponseDto.setDiseaseIdentified( diseaseHistory.getDiseaseIdentified() );
+        diseaseHistoryResponseDto.setId( diseaseHistory.getId() );
+        diseaseHistoryResponseDto.setImageUrl( diseaseHistory.getImageUrl() );
+        diseaseHistoryResponseDto.setPlantName( diseaseHistory.getPlantName() );
+        diseaseHistoryResponseDto.setRecommendedAction( diseaseHistory.getRecommendedAction() );
+        diseaseHistoryResponseDto.setSeverity( diseaseHistory.getSeverity() );
         diseaseHistoryResponseDto.setUpdatedAt( diseaseHistory.getUpdatedAt() );
 
         return diseaseHistoryResponseDto;
@@ -63,13 +63,13 @@ public class DiseaseHistoryMapperImpl implements DiseaseHistoryMapper {
 
         DiseaseHistory diseaseHistory = new DiseaseHistory();
 
-        diseaseHistory.setPlantName( dto.getPlantName() );
-        diseaseHistory.setDiseaseIdentified( dto.getDiseaseIdentified() );
-        diseaseHistory.setDateIdentified( dto.getDateIdentified() );
-        diseaseHistory.setSeverity( dto.getSeverity() );
         diseaseHistory.setConfidenceScore( dto.getConfidenceScore() );
-        diseaseHistory.setRecommendedAction( dto.getRecommendedAction() );
+        diseaseHistory.setDateIdentified( dto.getDateIdentified() );
+        diseaseHistory.setDiseaseIdentified( dto.getDiseaseIdentified() );
         diseaseHistory.setImageUrl( dto.getImageUrl() );
+        diseaseHistory.setPlantName( dto.getPlantName() );
+        diseaseHistory.setRecommendedAction( dto.getRecommendedAction() );
+        diseaseHistory.setSeverity( dto.getSeverity() );
 
         return diseaseHistory;
     }
