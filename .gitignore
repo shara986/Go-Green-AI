@@ -1,15 +1,26 @@
 # Maven build files
 target/
+**/target/
+backend/target/
+
+# Node dependencies & build
+node_modules/
+**/node_modules/
+dist/
+**/dist/
 
 # Java compiled files
 *.class
+**/*.class
 
 # IDE files
 .idea/
 .vscode/
+*.iml
 
 # Logs
 *.log
+**/*.log
 
 # OS files
 .DS_Store
