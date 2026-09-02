@@ -13,6 +13,7 @@ const LeafIcon = ({ size = 20, className = '' }) => (
 );
 
 const RegisterPage = () => {
+  const [role, setRole] = useState('CUSTOMER');
   const [formData, setFormData] = useState({
     name: '',
     username: '',
@@ -29,8 +30,8 @@ const RegisterPage = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [validationErrors, setValidationErrors] = useState({});
 
-  const { login, getDashboardPath } = useAuth();
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -92,7 +93,8 @@ const RegisterPage = () => {
     setSuccessMessage('');
 
     try {
-      const response = await api.post('/auth/register/customer', {
+      const endpoint = role === 'CUSTOMER' ? '/auth/register/customer' : '/auth/register/nursery';
+      const response = await api.post(endpoint, {
         name: formData.name.trim(),
         username: formData.username.trim(),
         email: formData.email.trim(),
@@ -104,22 +106,26 @@ const RegisterPage = () => {
       const resData = response.data;
       if (resData && (resData.success || resData.data)) {
         const authData = resData.data || resData;
-        
-        setSuccessMessage('Account created successfully!');
 
-        // Save auth data if token returned, then redirect to role dashboard
-        if (authData.accessToken) {
-          login(authData);
-          // Derive path from raw API response (context won't have updated yet)
-          const roles = authData.user?.roles || [];
-          const hasRoleIn = (r) => Array.isArray(roles) ? roles.includes(r) : false;
-          let rolePath = '/customer/dashboard';
-          if (hasRoleIn('ROLE_ADMIN')) rolePath = '/admin/dashboard';
-          else if (hasRoleIn('ROLE_NURSERY_OWNER')) rolePath = '/nursery/dashboard';
-          setTimeout(() => navigate(rolePath), 1200);
+        if (authData && authData.accessToken) {
+          // Backend returned real auth token, save the auth data
+          login(authData, true);
+          setSuccessMessage('Registration successful. Redirecting to your dashboard...');
+          
+          setTimeout(() => {
+            const roles = authData.user?.roles || [];
+            if (roles.includes('ROLE_ADMIN')) navigate('/admin/dashboard');
+            else if (roles.includes('ROLE_NURSERY_OWNER')) navigate('/nursery/dashboard');
+            else navigate('/customer/dashboard');
+          }, 1500);
         } else {
-          // No token returned (e.g. nursery/expert pending approval) → go to login
-          setTimeout(() => navigate('/login'), 1500);
+          // No access token returned (e.g. pending admin approval)
+          if (role === 'CUSTOMER') {
+            setSuccessMessage('Registration successful. Please login.');
+          } else {
+            setSuccessMessage('Your nursery manager account has been registered and is awaiting approval.');
+          }
+          setTimeout(() => navigate('/login'), 2000);
         }
       } else {
         setErrorMessage('Failed to complete registration.');
@@ -152,7 +158,7 @@ const RegisterPage = () => {
   return (
     <div className="register-page">
       <div className="register-split-container">
-        {/* Left Side Visual Panel */}
+        {/* Left Visual Panel */}
         <div className="register-visual-panel">
           <div className="register-visual-overlay"></div>
           <div className="register-visual-content">
@@ -166,32 +172,62 @@ const RegisterPage = () => {
           </div>
         </div>
 
-        {/* Right Side Form Panel */}
+        {/* Right Form Panel */}
         <div className="register-form-panel">
-          <div className="register-card">
-            <div className="register-card-header">
+          <div className="register-card" style={{ maxWidth: '480px', margin: '0 auto', width: '100%' }}>
+            <div className="register-card-header" style={{ marginBottom: '1.25rem' }}>
               <Link to="/" className="register-logo-brand">
                 <div className="logo-icon-wrapper">
                   <LeafIcon className="logo-icon" />
                 </div>
                 <span className="logo-text">GoGreen <span className="logo-highlight">AI</span></span>
               </Link>
-              <h2 className="register-heading">Create Your Account</h2>
-              <p className="register-subheading">Join GoGreen AI today</p>
+              <h2 className="register-heading">Create your GoGreen AI account</h2>
+            </div>
+
+            {/* Role Selection */}
+            <div className="role-selection-container" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', marginBottom: '1.5rem' }}>
+              <div 
+                className={`role-card ${role === 'CUSTOMER' ? 'selected' : ''}`}
+                onClick={() => setRole('CUSTOMER')}
+                style={{
+                  border: role === 'CUSTOMER' ? '2px solid #16a34a' : '1px solid #d1d5db',
+                  borderRadius: '10px', padding: '1rem', cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s ease',
+                  backgroundColor: role === 'CUSTOMER' ? '#f0fdf4' : '#fff'
+                }}
+              >
+                <div style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>🌱</div>
+                <div style={{ fontWeight: '700', color: '#111827', fontSize: '0.95rem', marginBottom: '0.25rem' }}>Customer</div>
+                <div style={{ fontSize: '0.75rem', color: '#4b5563', lineHeight: '1.3' }}>Shop plants and manage your plant collection.</div>
+              </div>
+              
+              <div 
+                className={`role-card ${role === 'NURSERY_MANAGER' ? 'selected' : ''}`}
+                onClick={() => setRole('NURSERY_MANAGER')}
+                style={{
+                  border: role === 'NURSERY_MANAGER' ? '2px solid #16a34a' : '1px solid #d1d5db',
+                  borderRadius: '10px', padding: '1rem', cursor: 'pointer', textAlign: 'center', transition: 'all 0.2s ease',
+                  backgroundColor: role === 'NURSERY_MANAGER' ? '#f0fdf4' : '#fff'
+                }}
+              >
+                <div style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>🌿</div>
+                <div style={{ fontWeight: '700', color: '#111827', fontSize: '0.95rem', marginBottom: '0.25rem' }}>Nursery Manager</div>
+                <div style={{ fontSize: '0.75rem', color: '#4b5563', lineHeight: '1.3' }}>Manage your nursery and plants.</div>
+              </div>
             </div>
 
             {/* Success Banner */}
             {successMessage && (
-              <div className="register-success-banner">
-                <FiCheckCircle className="success-icon" />
-                <span>{successMessage} Redirecting...</span>
+              <div className="register-success-banner" style={{ background: '#dcfce7', color: '#15803d', padding: '0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', fontSize: '0.875rem' }}>
+                <FiCheckCircle size={18} />
+                <span>{successMessage}</span>
               </div>
             )}
 
             {/* Error Banner */}
             {errorMessage && (
-              <div className="register-error-banner">
-                <FiAlertCircle className="error-icon" />
+              <div className="register-error-banner" style={{ background: '#fee2e2', color: '#b91c1c', padding: '0.75rem', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem', fontSize: '0.875rem' }}>
+                <FiAlertCircle size={18} />
                 <span>{errorMessage}</span>
               </div>
             )}
@@ -281,7 +317,7 @@ const RegisterPage = () => {
               </div>
 
               <div className="form-row-2col">
-                <div className="form-group">
+                <div className="form-group" style={{ marginBottom: 0 }}>
                   <label htmlFor="password" className="form-label">
                     Password <span className="required-star">*</span>
                   </label>
@@ -303,15 +339,14 @@ const RegisterPage = () => {
                       className="password-toggle-btn"
                       onClick={() => setShowPassword((prev) => !prev)}
                       tabIndex={-1}
-                      aria-label={showPassword ? 'Hide password' : 'Show password'}
                     >
                       {showPassword ? <FiEyeOff /> : <FiEye />}
                     </button>
                   </div>
-                  {validationErrors.password && <span className="field-error">{validationErrors.password}</span>}
+                  {validationErrors.password && <span className="field-error" style={{ position: 'relative', marginTop: 4 }}>{validationErrors.password}</span>}
                 </div>
 
-                <div className="form-group">
+                <div className="form-group" style={{ marginBottom: 0 }}>
                   <label htmlFor="confirmPassword" className="form-label">
                     Confirm Password <span className="required-star">*</span>
                   </label>
@@ -333,19 +368,19 @@ const RegisterPage = () => {
                       className="password-toggle-btn"
                       onClick={() => setShowConfirmPassword((prev) => !prev)}
                       tabIndex={-1}
-                      aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
                     >
                       {showConfirmPassword ? <FiEyeOff /> : <FiEye />}
                     </button>
                   </div>
-                  {validationErrors.confirmPassword && <span className="field-error">{validationErrors.confirmPassword}</span>}
+                  {validationErrors.confirmPassword && <span className="field-error" style={{ position: 'relative', marginTop: 4 }}>{validationErrors.confirmPassword}</span>}
                 </div>
               </div>
 
               <button
                 type="submit"
                 className="btn-primary register-submit-btn"
-                disabled={loading}
+                disabled={loading || successMessage}
+                style={{ marginTop: '1.25rem' }}
               >
                 {loading ? 'Creating Account...' : 'Create Account'}
               </button>

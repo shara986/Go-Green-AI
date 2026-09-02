@@ -1,0 +1,48 @@
+/* ── PlantImage Component ─────────────────────────────── */
+
+.plant-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md, 14px);
+  background: #f0fdf4;
+  width: 100%;
+}
+
+.plant-image-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.plant-image-hover:hover .plant-image-img {
+  transform: scale(1.05);
+}
+
+/* ── Fallback placeholder ────────────────────────────── */
+.plant-image-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(145deg, #e8f5e9, #f0fdf4);
+}
+
+.plant-fallback-svg {
+  width: 56px;
+  height: 56px;
+  opacity: 0.8;
+}
+
+.plant-fallback-text {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--primary-green, #2D6A4F);
+  opacity: 0.5;
+}

@@ -129,6 +129,17 @@
 
 .db-nav-item svg, .db-nav-item .nav-icon { flex-shrink: 0; }
 
+.db-nav-badge {
+  margin-left: auto;
+  background: var(--dashboard-sidebar-active);
+  color: #0f1f14;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 99px;
+  line-height: 1;
+}
+
 .db-sidebar-footer {
   padding: 12px;
   border-top: 1px solid rgba(255,255,255,0.08);

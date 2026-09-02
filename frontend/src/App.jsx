@@ -12,15 +12,35 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AdminRoute from './components/guards/AdminRoute';
 import CustomerRoute from './components/guards/CustomerRoute';
 import NurseryRoute from './components/guards/NurseryRoute';
+import PublicOnlyRoute from './components/guards/PublicOnlyRoute';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { AuthProvider } from './context/AuthContext';
+import { ToastProvider } from './components/common/Toast';
 
 // Dashboard pages
 import AdminDashboard from './pages/admin/AdminDashboard';
+// Customer pages
 import CustomerDashboard from './pages/customer/CustomerDashboard';
-import NurseryDashboard from './pages/nursery/NurseryDashboard';
-
+import CustomerPlantsPage from './pages/customer/CustomerPlantsPage';
+import CustomerPlantDetailPage from './pages/customer/CustomerPlantDetailPage';
+import CustomerCategoriesPage from './pages/customer/CustomerCategoriesPage';
+import CustomerOrdersPage from './pages/customer/CustomerOrdersPage';
+import CustomerOrderDetailPage from './pages/customer/CustomerOrderDetailPage';
+import CustomerCartPage from './pages/customer/CustomerCartPage';
+import CustomerWishlistPage from './pages/customer/CustomerWishlistPage';
+import CustomerPlantDiaryPage from './pages/customer/CustomerPlantDiaryPage';
+import CustomerProfilePage from './pages/customer/CustomerProfilePage';
+import NurseryLayout from './components/nursery/NurseryLayout';
+import NurseryDashboardOverview from './pages/nursery/NurseryDashboardOverview';
+import NurseryProfilePage from './pages/nursery/NurseryProfilePage';
+import NurseryPlantsPage from './pages/nursery/NurseryPlantsPage';
+import NurseryInventoryPage from './pages/nursery/NurseryInventoryPage';
+import NurseryOrdersPage from './pages/nursery/NurseryOrdersPage';
+import NurseryOrderDetailPage from './pages/nursery/NurseryOrderDetailPage';
+import NurseryCustomersPage from './pages/nursery/NurseryCustomersPage';
+import NurseryReportsPage from './pages/nursery/NurseryReportsPage';
+import NurseryUserSettingsPage from './pages/nursery/NurseryUserSettingsPage';
 // Dashboard pages have their own sidebar/topnav — hide global Navbar & Footer for them
 const DASHBOARD_PATHS = [
   '/admin',
@@ -44,13 +64,28 @@ const AppLayout = ({ children }) => {
 function App() {
   return (
     <AuthProvider>
+      <ToastProvider>
       <Router>
         <AppLayout>
           <Routes>
             {/* =================== PUBLIC ROUTES =================== */}
             <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
+            <Route 
+              path="/login" 
+              element={
+                <PublicOnlyRoute>
+                  <LoginPage />
+                </PublicOnlyRoute>
+              } 
+            />
+            <Route 
+              path="/register" 
+              element={
+                <PublicOnlyRoute>
+                  <RegisterPage />
+                </PublicOnlyRoute>
+              } 
+            />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
 
@@ -99,7 +134,7 @@ function App() {
               }
             />
 
-            {/* =================== CUSTOMER DASHBOARD =================== */}
+            {/* =================== CUSTOMER DASHBOARD & SUB-PAGES =================== */}
             <Route
               path="/customer/dashboard"
               element={
@@ -109,37 +144,114 @@ function App() {
               }
             />
             <Route
+              path="/customer/plants"
+              element={
+                <CustomerRoute>
+                  <CustomerPlantsPage />
+                </CustomerRoute>
+              }
+            />
+            <Route
+              path="/customer/plants/:plantId"
+              element={
+                <CustomerRoute>
+                  <CustomerPlantDetailPage />
+                </CustomerRoute>
+              }
+            />
+            <Route
+              path="/customer/categories"
+              element={
+                <CustomerRoute>
+                  <CustomerCategoriesPage />
+                </CustomerRoute>
+              }
+            />
+            <Route
+              path="/customer/orders"
+              element={
+                <CustomerRoute>
+                  <CustomerOrdersPage />
+                </CustomerRoute>
+              }
+            />
+            <Route
+              path="/customer/orders/:orderId"
+              element={
+                <CustomerRoute>
+                  <CustomerOrderDetailPage />
+                </CustomerRoute>
+              }
+            />
+            <Route
+              path="/customer/cart"
+              element={
+                <CustomerRoute>
+                  <CustomerCartPage />
+                </CustomerRoute>
+              }
+            />
+            <Route
+              path="/customer/wishlist"
+              element={
+                <CustomerRoute>
+                  <CustomerWishlistPage />
+                </CustomerRoute>
+              }
+            />
+            <Route
+              path="/customer/plant-diary"
+              element={
+                <CustomerRoute>
+                  <CustomerPlantDiaryPage />
+                </CustomerRoute>
+              }
+            />
+            <Route
+              path="/customer/profile"
+              element={
+                <CustomerRoute>
+                  <CustomerProfilePage />
+                </CustomerRoute>
+              }
+            />
+            <Route
               path="/customer/*"
               element={
                 <CustomerRoute>
-                  <CustomerDashboard />
+                  <Navigate to="/customer/dashboard" replace />
                 </CustomerRoute>
               }
             />
 
             {/* =================== NURSERY DASHBOARD =================== */}
             <Route
-              path="/nursery/dashboard"
+              path="/nursery"
               element={
                 <NurseryRoute>
-                  <NurseryDashboard />
+                  <NurseryLayout />
                 </NurseryRoute>
               }
-            />
-            <Route
-              path="/nursery/*"
-              element={
-                <NurseryRoute>
-                  <NurseryDashboard />
-                </NurseryRoute>
-              }
-            />
+            >
+              <Route path="dashboard" element={<NurseryDashboardOverview />} />
+              <Route path="my-nursery" element={<NurseryProfilePage />} />
+              <Route path="plants" element={<NurseryPlantsPage />} />
+              <Route path="inventory" element={<NurseryInventoryPage />} />
+              <Route path="orders" element={<NurseryOrdersPage />} />
+              <Route path="orders/:orderId" element={<NurseryOrderDetailPage />} />
+              <Route path="customers" element={<NurseryCustomersPage />} />
+              <Route path="reports" element={<NurseryReportsPage />} />
+              <Route path="profile" element={<NurseryUserSettingsPage />} />
+              <Route path="" element={<Navigate to="dashboard" replace />} />
+              <Route path="*" element={<Navigate to="dashboard" replace />} />
+            </Route>
 
             {/* =================== FALLBACK =================== */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </AppLayout>
       </Router>
+      </ToastProvider>
     </AuthProvider>
   );
 }

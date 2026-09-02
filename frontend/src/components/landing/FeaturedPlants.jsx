@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { FiLock, FiEye, FiShoppingBag, FiCheckCircle } from 'react-icons/fi';
 import api from '../../api/axiosInstance';
 import { useAuth } from '../../context/AuthContext';
+import PlantImage from '../common/PlantImage';
+import formatCurrency from '../../utils/formatCurrency';
 import './FeaturedPlants.css';
 
 const FeaturedPlants = () => {
@@ -74,26 +76,26 @@ const FeaturedPlants = () => {
             {plants.map((plant) => (
               <div key={plant.id} className="plant-card">
                 <div className="plant-img-wrapper">
-                  <img
-                    src={plant.imageUrl || 'https://images.unsplash.com/photo-1545241047-6083a3684587?w=500&auto=format&fit=crop&q=60'}
+                  <PlantImage
+                    src={plant.imageUrl}
                     alt={plant.name}
-                    className="plant-img"
+                    aspectRatio="4/3"
                   />
-                  <span className={`availability-tag ${plant.available ? 'in-stock' : 'out-of-stock'}`}>
-                    {plant.available ? 'In Stock' : 'Unavailable'}
+                  <span className={`availability-tag ${plant.available !== false && plant.stock > 0 ? 'in-stock' : 'out-of-stock'}`}>
+                    {plant.available !== false && plant.stock > 0 ? 'In Stock' : 'Unavailable'}
                   </span>
                 </div>
 
                 <div className="plant-info">
-                  <div className="plant-type-badge">{plant.categoryName || plant.type || 'Indoor'}</div>
+                  <div className="plant-type-badge">{plant.categoryName || plant.type || plant.plantType || 'Indoor'}</div>
                   <h3 className="plant-name">{plant.name}</h3>
                   <p className="plant-scientific">{plant.scientificName || 'Botanical Species'}</p>
                   
                   <div className="plant-price-row">
-                    <span className="plant-price">${plant.price ? plant.price.toFixed(2) : '0.00'}</span>
-                    <button className="btn-view-plant">
+                    <span className="plant-price">{formatCurrency(plant.price || 499)}</span>
+                    <Link to={`/plants/${plant.id}`} className="btn-view-plant">
                       <FiEye /> View Plant
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>

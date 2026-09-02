@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { FiSearch, FiFilter, FiEye, FiShoppingBag, FiAlertCircle, FiRefreshCw, FiCheckCircle, FiXCircle } from 'react-icons/fi';
 import api from '../api/axiosInstance';
+import PlantImage from '../components/common/PlantImage';
+import formatCurrency from '../utils/formatCurrency';
 import './PlantsPage.css';
 
 const LeafIcon = ({ size = 20, className = '' }) => (
@@ -257,13 +259,10 @@ const PlantsPage = () => {
               {plants.map((plant) => (
                 <div key={plant.id} className="plant-card">
                   <div className="plant-img-wrapper">
-                    <img
-                      src={
-                        plant.imageUrl ||
-                        'https://images.unsplash.com/photo-1545241047-6083a3684587?w=500&auto=format&fit=crop&q=60'
-                      }
+                    <PlantImage
+                      src={plant.imageUrl}
                       alt={plant.name}
-                      className="plant-img"
+                      aspectRatio="4/3"
                     />
                     <span
                       className={`availability-tag ${
@@ -282,7 +281,7 @@ const PlantsPage = () => {
                     <p className="plant-scientific">{plant.scientificName || 'Botanical Species'}</p>
 
                     <div className="plant-price-row">
-                      <span className="plant-price">₹{plant.price ? plant.price.toFixed(2) : '499.00'}</span>
+                      <span className="plant-price">{formatCurrency(plant.price || 499)}</span>
                       <Link to={`/plants/${plant.id}`} className="btn-view-plant">
                         <FiEye /> View Details
                       </Link>

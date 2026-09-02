@@ -16,7 +16,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { isAuthenticated, user, logout, isAdmin, getDashboardPath } = useAuth();
+  const { isAuthenticated, user, logout, isAdmin, isNurseryOwner, isCustomer, getDashboardPath } = useAuth();
 
   useEffect(() => { setMenuOpen(false); }, [location.pathname]);
 
@@ -26,29 +26,57 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Always-visible public links
-  const publicNavLinks = [
-    { name: 'Home', to: '/' },
-    { name: 'About', to: '/about' },
-    { name: 'Contact', to: '/contact' },
-  ];
-
-  // Visible in navbar but require auth — redirect to /login if not authenticated
-  const protectedNavLinks = [
-    { name: 'Plants', to: '/plants' },
-    { name: 'Categories', to: '/categories' },
-  ];
-
-  const handleLogout = () => { logout(); navigate('/'); };
-
-  const handleProtectedClick = (e, to) => {
-    if (!isAuthenticated) {
-      e.preventDefault();
-      navigate(`/login?redirect=${encodeURIComponent(to)}`);
-    }
+  const handleLogout = () => { 
+    logout(); 
+    navigate('/'); 
   };
 
-  const dashboardPath = isAuthenticated && getDashboardPath ? getDashboardPath() : '/login';
+  // Generate dynamic links based on role
+  const getNavLinks = () => {
+    if (!isAuthenticated) {
+      return [
+        { name: 'Home', to: '/' },
+        { name: 'Plants', to: '/plants' },
+        { name: 'Categories', to: '/categories' },
+        { name: 'About', to: '/about' },
+        { name: 'Contact', to: '/contact' }
+      ];
+    } else if (isCustomer) {
+      return [
+        { name: 'Home', to: '/' },
+        { name: 'Plants', to: '/plants' },
+        { name: 'Categories', to: '/categories' },
+        { name: 'About', to: '/about' },
+        { name: 'Contact', to: '/contact' },
+        { name: 'Dashboard', to: '/customer/dashboard' },
+        { name: 'Profile', to: '/customer/profile' }
+      ];
+    } else if (isNurseryOwner) {
+      return [
+        { name: 'Home', to: '/' },
+        { name: 'Plants', to: '/plants' },
+        { name: 'Categories', to: '/categories' },
+        { name: 'About', to: '/about' },
+        { name: 'Contact', to: '/contact' },
+        { name: 'Nursery Dashboard', to: '/nursery/dashboard' },
+        { name: 'Profile', to: '/nursery/profile' } // Ensure profile endpoint exists or fallback handled
+      ];
+    } else if (isAdmin) {
+      return [
+        { name: 'Admin Dashboard', to: '/admin/dashboard' },
+        { name: 'Users', to: '/admin/users' },
+        { name: 'Nurseries', to: '/admin/nurseries' },
+        { name: 'Categories', to: '/admin/categories' },
+        { name: 'Plants', to: '/admin/plants' },
+        { name: 'Orders', to: '/admin/orders' },
+        { name: 'Statistics', to: '/admin/statistics' }
+      ];
+    }
+    return [];
+  };
+
+  const navLinks = getNavLinks();
+  const dashboardPath = getDashboardPath();
 
   return (
     <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
@@ -62,20 +90,10 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <nav className="nav-links desktop">
-          {publicNavLinks.map((link) => (
+          {navLinks.map((link) => (
             <NavLink
               key={link.name}
               to={link.to}
-              className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
-            >
-              {link.name}
-            </NavLink>
-          ))}
-          {protectedNavLinks.map((link) => (
-            <NavLink
-              key={link.name}
-              to={link.to}
-              onClick={(e) => handleProtectedClick(e, link.to)}
               className={({ isActive }) => (isActive ? 'nav-item active' : 'nav-item')}
             >
               {link.name}
@@ -87,9 +105,11 @@ const Navbar = () => {
         <div className="auth-section desktop">
           {isAuthenticated ? (
             <div className="user-profile-menu">
-              <Link to={dashboardPath} className="admin-badge">
-                <FiLayout /> Dashboard
-              </Link>
+              {isAdmin && (
+                <Link to={dashboardPath} className="admin-badge">
+                  <FiLayout /> {document.title.includes('Admin') ? 'Admin Panel' : 'Dashboard'}
+                </Link>
+              )}
               <span className="user-greeting">
                 <FiUser className="user-icon" /> {user?.name || user?.username || 'User'}
               </span>
@@ -100,7 +120,7 @@ const Navbar = () => {
           ) : (
             <div className="auth-buttons">
               <Link to="/login" className="nav-login-btn">Login</Link>
-              <Link to="/register" className="btn-primary nav-register-btn">Register</Link>
+              <Link to="/register" className="btn-primary nav-register-btn">Get Started</Link>
             </div>
           )}
         </div>
@@ -118,20 +138,10 @@ const Navbar = () => {
       {/* Mobile Menu Drawer */}
       <div className={`mobile-drawer ${menuOpen ? 'open' : ''}`}>
         <nav className="mobile-nav-links">
-          {publicNavLinks.map((link) => (
+          {navLinks.map((link) => (
             <NavLink
               key={link.name}
               to={link.to}
-              className={({ isActive }) => (isActive ? 'mobile-nav-item active' : 'mobile-nav-item')}
-            >
-              {link.name}
-            </NavLink>
-          ))}
-          {protectedNavLinks.map((link) => (
-            <NavLink
-              key={link.name}
-              to={link.to}
-              onClick={(e) => handleProtectedClick(e, link.to)}
               className={({ isActive }) => (isActive ? 'mobile-nav-item active' : 'mobile-nav-item')}
             >
               {link.name}
@@ -160,7 +170,7 @@ const Navbar = () => {
           ) : (
             <div className="mobile-auth-btns">
               <Link to="/login" className="btn-secondary full-width">Login</Link>
-              <Link to="/register" className="btn-primary full-width">Register</Link>
+              <Link to="/register" className="btn-primary full-width">Get Started</Link>
             </div>
           )}
         </div>

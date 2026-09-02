@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { FiArrowLeft, FiSun, FiDroplet, FiShield, FiAlertCircle, FiCheckCircle, FiPackage, FiGrid } from 'react-icons/fi';
+import { FiArrowLeft, FiSun, FiDroplet, FiShield, FiAlertCircle, FiCheckCircle, FiPackage, FiGrid, FiShoppingCart, FiHeart } from 'react-icons/fi';
 import api from '../api/axiosInstance';
+import PlantImage from '../components/common/PlantImage';
+import formatCurrency from '../utils/formatCurrency';
+import { useToast } from '../components/common/Toast';
 import './PlantDetailPage.css';
 
 const LeafIcon = ({ size = 20, className = '' }) => (
@@ -79,13 +82,10 @@ const PlantDetailPage = () => {
           {/* Left Column: Large Image */}
           <div className="detail-image-panel">
             <div className="detail-image-card">
-              <img
-                src={
-                  plant.imageUrl ||
-                  'https://images.unsplash.com/photo-1545241047-6083a3684587?w=800&auto=format&fit=crop&q=80'
-                }
+              <PlantImage
+                src={plant.imageUrl}
                 alt={plant.name}
-                className="detail-main-img"
+                aspectRatio="1/1"
               />
               <span className={`detail-availability-badge ${plant.active !== false && plant.stock > 0 ? 'in-stock' : 'out-of-stock'}`}>
                 {plant.active !== false && plant.stock > 0 ? 'In Stock' : 'Out of Stock'}
@@ -103,7 +103,7 @@ const PlantDetailPage = () => {
             <p className="detail-scientific">{plant.scientificName || 'Botanical Species'}</p>
 
             <div className="detail-price-box">
-              <span className="detail-price">₹{plant.price ? plant.price.toFixed(2) : '499.00'}</span>
+              <span className="detail-price">{formatCurrency(plant.price || 499)}</span>
               <span className="detail-sku">SKU: {plant.sku || 'N/A'}</span>
             </div>
 
@@ -140,6 +140,24 @@ const PlantDetailPage = () => {
                   <span className="meta-val">{plant.stock ?? 10} units</span>
                 </div>
               </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="detail-actions-row" style={{ display: 'flex', gap: '12px', margin: '20px 0' }}>
+              <button
+                className="btn-primary"
+                style={{ flex: 1, padding: '14px 24px', fontSize: '1rem', cursor: 'pointer' }}
+                onClick={() => toast.success(`"${plant.name}" added to cart!`)}
+              >
+                <FiShoppingCart size={18} /> Add to Cart
+              </button>
+              <button
+                className="btn-secondary"
+                style={{ padding: '14px 20px', fontSize: '1rem', cursor: 'pointer' }}
+                onClick={() => toast.info(`"${plant.name}" added to wishlist!`)}
+              >
+                <FiHeart size={18} />
+              </button>
             </div>
 
             {/* Description */}

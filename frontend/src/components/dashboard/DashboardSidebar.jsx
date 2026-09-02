@@ -41,17 +41,25 @@ const DashboardSidebar = ({ links = [], isOpen, onClose, onLogout }) => {
 
         {/* Navigation links */}
         <nav className="db-sidebar-nav">
-          {links.map(({ label, to, icon }) => (
+          {links.map(({ label, to, icon, badge }) => (
             <NavLink
               key={to}
               to={to}
-              className={({ isActive }) =>
-                `db-nav-item${isActive || location.pathname === to ? ' active' : ''}`
-              }
+              className={({ isActive }) => {
+                // Highlight if active or subroute match (e.g. /customer/plants/123 -> /customer/plants)
+                const isExactOrSub =
+                  isActive ||
+                  location.pathname === to ||
+                  (to !== '/customer/dashboard' && location.pathname.startsWith(to));
+                return `db-nav-item${isExactOrSub ? ' active' : ''}`;
+              }}
               onClick={onClose}
             >
               {icon && <span className="nav-icon">{icon}</span>}
-              {label}
+              <span style={{ flex: 1 }}>{label}</span>
+              {badge !== undefined && badge !== null && badge > 0 && (
+                <span className="db-nav-badge">{badge}</span>
+              )}
             </NavLink>
           ))}
         </nav>

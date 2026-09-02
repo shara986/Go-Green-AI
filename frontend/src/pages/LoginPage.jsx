@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiUser, FiLock, FiEye, FiEyeOff, FiAlertCircle } from 'react-icons/fi';
+import { FiUser, FiLock, FiEye, FiEyeOff, FiAlertCircle, FiCheck } from 'react-icons/fi';
 import api from '../api/axiosInstance';
 import { useAuth } from '../context/AuthContext';
 import './LoginPage.css';
@@ -17,12 +17,13 @@ const LoginPage = () => {
     usernameOrEmail: '',
     password: '',
   });
+  const [rememberMe, setRememberMe] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [validationError, setValidationError] = useState('');
 
-  const { login, getDashboardPath } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -34,11 +35,10 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (loading) return; // Prevent duplicate submission
+    if (loading) return;
 
-    // Form Validation
     if (!formData.usernameOrEmail.trim()) {
-      setValidationError('Please enter your username/email.');
+      setValidationError('Please enter your username or email address.');
       return;
     }
     if (!formData.password) {
@@ -56,29 +56,34 @@ const LoginPage = () => {
         password: formData.password,
       });
 
-      // API returns ApiResponse<AuthResponseDto> -> { success, message, data: { accessToken, refreshToken, tokenType, expiresIn, user } }
+      // API Returns: ApiResponse<AuthResponseDto> -> { success, message, data: { accessToken, refreshToken, user } }
       const resData = response.data;
       if (resData && (resData.success || resData.data)) {
         const authData = resData.data || resData;
-        
-        // Save auth data
-        login(authData);
 
-        // Check if there was a target redirect path (deep-link protection)
+        // Persist token and user role
+        login(authData, rememberMe);
+
+        // Derive target role dashboard
+        const roles = authData.user?.roles || [];
+        const hasRole = (role) => (Array.isArray(roles) ? roles.includes(role) : false);
+
+        let targetPath = '/customer/dashboard';
+        if (hasRole('ROLE_ADMIN')) {
+          targetPath = '/admin/dashboard';
+        } else if (hasRole('ROLE_NURSERY_OWNER')) {
+          targetPath = '/nursery/dashboard';
+        } else if (hasRole('ROLE_CUSTOMER')) {
+          targetPath = '/customer/dashboard';
+        }
+
+        // Check if there was a redirected path (from protected route guard)
         const searchParams = new URLSearchParams(window.location.search);
         const redirectPath = searchParams.get('redirect');
 
-        // Derive dashboard path from the API response directly (context hasn't re-rendered yet)
-        const roles = authData.user?.roles || [];
-        const hasRoleIn = (role) => Array.isArray(roles) ? roles.includes(role) : false;
-        let rolePath = '/';
-        if (hasRoleIn('ROLE_ADMIN')) rolePath = '/admin/dashboard';
-        else if (hasRoleIn('ROLE_NURSERY_OWNER')) rolePath = '/nursery/dashboard';
-        else if (hasRoleIn('ROLE_CUSTOMER')) rolePath = '/customer/dashboard';
-
-        navigate(redirectPath || rolePath);
+        navigate(redirectPath || targetPath, { replace: true });
       } else {
-        setErrorMessage('Invalid response format from server.');
+        setErrorMessage('Invalid response structure received from server.');
       }
     } catch (err) {
       console.error('Login error:', err);
@@ -89,7 +94,7 @@ const LoginPage = () => {
         } else if (status === 403) {
           setErrorMessage('You do not have permission to access this account.');
         } else {
-          setErrorMessage(err.response.data?.message || 'Invalid username/email or password.');
+          setErrorMessage(err.response.data?.message || 'Invalid credentials. Please try again.');
         }
       } else {
         setErrorMessage('Unable to connect to the server. Please try again.');
@@ -102,7 +107,7 @@ const LoginPage = () => {
   return (
     <div className="login-page">
       <div className="login-split-container">
-        {/* Left Side Visual (Desktop / Tablet) */}
+        {/* Left Visual Panel */}
         <div className="login-visual-panel">
           <div className="login-visual-overlay"></div>
           <div className="login-visual-content">
@@ -110,11 +115,11 @@ const LoginPage = () => {
               <LeafIcon /> GoGreen Platform
             </div>
             <h1 className="visual-heading">Welcome back to GoGreen AI</h1>
-            <p className="visual-subheading">Your smarter way to grow and manage plants.</p>
+            <p className="visual-subheading">Your intelligent platform for plant care, shopping, and nursery management.</p>
           </div>
         </div>
 
-        {/* Right Side Form Panel */}
+        {/* Right Form Panel */}
         <div className="login-form-panel">
           <div className="login-card">
             <div className="login-card-header">
@@ -122,13 +127,15 @@ const LoginPage = () => {
                 <div className="logo-icon-wrapper">
                   <LeafIcon className="logo-icon" />
                 </div>
-                <span className="logo-text">GoGreen <span className="logo-highlight">AI</span></span>
+                <span className="logo-text">
+                  GoGreen <span className="logo-highlight">AI</span>
+                </span>
               </Link>
               <h2 className="login-heading">Welcome Back</h2>
-              <p className="login-subheading">Sign in to continue to GoGreen AI</p>
+              <p className="login-subheading">Sign in to access your dashboard</p>
             </div>
 
-            {/* Error Message Box */}
+            {/* Error Banners */}
             {(errorMessage || validationError) && (
               <div className="login-error-banner">
                 <FiAlertCircle className="error-icon" />
@@ -162,7 +169,14 @@ const LoginPage = () => {
                   <label htmlFor="password" className="form-label">
                     Password
                   </label>
-                  <a href="#forgot-password" onClick={(e) => { e.preventDefault(); alert("Password reset instructions available via admin or /api/auth/forgot-password"); }} className="forgot-link">
+                  <a
+                    href="#forgot-password"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      alert('Password reset instructions can be requested via /api/auth/forgot-password or contacting support.');
+                    }}
+                    className="forgot-link"
+                  >
                     Forgot Password?
                   </a>
                 </div>
@@ -189,6 +203,19 @@ const LoginPage = () => {
                     {showPassword ? <FiEyeOff /> : <FiEye />}
                   </button>
                 </div>
+              </div>
+
+              {/* Remember Me Checkbox */}
+              <div className="remember-me-row" style={{ display: 'flex', alignItems: 'center', margin: '0.25rem 0 1rem 0' }}>
+                <label style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.875rem', color: '#4b5563' }}>
+                  <input
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    style={{ accentColor: '#16a34a', width: '16px', height: '16px', cursor: 'pointer' }}
+                  />
+                  Remember me on this device
+                </label>
               </div>
 
               <button

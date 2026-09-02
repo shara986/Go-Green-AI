@@ -1,0 +1,251 @@
+.nursery-profile {
+  /* Inherits from .nursery-page */
+}
+
+/* Page Header Flexing to accommodate buttons */
+.page-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-header-flex .nursery-page-title {
+  margin-bottom: 0;
+}
+
+/* Edit Card */
+.profile-edit-card, .profile-main-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--color-gray-900);
+}
+
+.border-bottom {
+  border-bottom: 1px solid var(--border-color);
+}
+.border-top {
+  border-top: 1px solid var(--border-color);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: var(--color-gray-500);
+  cursor: pointer;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.close-btn:hover {
+  color: var(--color-gray-900);
+}
+
+/* Form Settings */
+.edit-nursery-form {
+  padding: 1.5rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-gray-700);
+  margin-bottom: 0.5rem;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 0.875rem;
+  color: var(--color-gray-400);
+  width: 18px;
+  height: 18px;
+}
+
+.input-group input, .select-input, textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  outline: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.input-group input {
+  padding-left: 2.5rem;
+}
+
+.input-group input:focus, .select-input:focus, textarea:focus {
+  border-color: var(--color-primary-500);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Profile View Mode */
+.nursery-cover {
+  position: relative;
+  height: 200px;
+  background: var(--color-gray-100);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nursery-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cover-placeholder {
+  color: var(--color-gray-400);
+}
+
+.nursery-status-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.status-open {
+  color: var(--color-primary-700);
+  border: 1px solid var(--color-primary-200);
+}
+
+.status-closed {
+  color: var(--color-gray-600);
+  border: 1px solid var(--color-gray-300);
+}
+
+.status-temporarily-closed {
+  color: #d97706;
+  border: 1px solid #fcd34d;
+}
+
+.profile-info-content {
+  padding: 2rem;
+}
+
+.nursery-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  margin-bottom: 0.25rem;
+}
+
+.nursery-owner {
+  font-size: 0.95rem;
+  color: var(--color-gray-500);
+  margin-bottom: 1.25rem;
+}
+
+.nursery-description {
+  font-size: 1rem;
+  color: var(--color-gray-700);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 2rem 0;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.info-item .icon {
+  width: 40px;
+  height: 40px;
+  background: var(--color-primary-50);
+  color: var(--color-primary-600);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.info-item .label {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-gray-500);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.info-item .value {
+  display: block;
+  font-size: 1rem;
+  color: var(--color-gray-900);
+  font-weight: 500;
+}
