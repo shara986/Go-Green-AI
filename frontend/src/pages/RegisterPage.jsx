@@ -29,7 +29,7 @@ const RegisterPage = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [validationErrors, setValidationErrors] = useState({});
 
-  const { login } = useAuth();
+  const { login, getDashboardPath } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -106,15 +106,21 @@ const RegisterPage = () => {
         const authData = resData.data || resData;
         
         setSuccessMessage('Account created successfully!');
-        
-        // Save auth data if token returned
+
+        // Save auth data if token returned, then redirect to role dashboard
         if (authData.accessToken) {
           login(authData);
+          // Derive path from raw API response (context won't have updated yet)
+          const roles = authData.user?.roles || [];
+          const hasRoleIn = (r) => Array.isArray(roles) ? roles.includes(r) : false;
+          let rolePath = '/customer/dashboard';
+          if (hasRoleIn('ROLE_ADMIN')) rolePath = '/admin/dashboard';
+          else if (hasRoleIn('ROLE_NURSERY_OWNER')) rolePath = '/nursery/dashboard';
+          setTimeout(() => navigate(rolePath), 1200);
+        } else {
+          // No token returned (e.g. nursery/expert pending approval) → go to login
+          setTimeout(() => navigate('/login'), 1500);
         }
-
-        setTimeout(() => {
-          navigate('/');
-        }, 1500);
       } else {
         setErrorMessage('Failed to complete registration.');
       }

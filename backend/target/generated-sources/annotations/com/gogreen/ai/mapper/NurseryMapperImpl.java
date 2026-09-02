@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-09-02T07:58:26+0530",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
+    date = "2026-09-02T08:01:45+0530",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 25.0.2 (Oracle Corporation)"
 )
 @Component
 public class NurseryMapperImpl implements NurseryMapper {
@@ -27,20 +27,20 @@ public class NurseryMapperImpl implements NurseryMapper {
         NurseryResponseDto nurseryResponseDto = new NurseryResponseDto();
 
         nurseryResponseDto.setUserId( nurseryUserId( nursery ) );
+        nurseryResponseDto.setId( nursery.getId() );
+        nurseryResponseDto.setName( nursery.getName() );
+        nurseryResponseDto.setDescription( nursery.getDescription() );
         nurseryResponseDto.setAddress( nursery.getAddress() );
-        nurseryResponseDto.setApprovalStatus( nursery.getApprovalStatus() );
         nurseryResponseDto.setCity( nursery.getCity() );
+        nurseryResponseDto.setPostalCode( nursery.getPostalCode() );
         nurseryResponseDto.setContactEmail( nursery.getContactEmail() );
         nurseryResponseDto.setContactPhone( nursery.getContactPhone() );
-        nurseryResponseDto.setCreatedAt( nursery.getCreatedAt() );
-        nurseryResponseDto.setDescription( nursery.getDescription() );
-        nurseryResponseDto.setId( nursery.getId() );
-        nurseryResponseDto.setLogoUrl( nursery.getLogoUrl() );
-        nurseryResponseDto.setName( nursery.getName() );
-        nurseryResponseDto.setPostalCode( nursery.getPostalCode() );
         nurseryResponseDto.setRating( nursery.getRating() );
-        nurseryResponseDto.setUpdatedAt( nursery.getUpdatedAt() );
         nurseryResponseDto.setVerified( nursery.isVerified() );
+        nurseryResponseDto.setApprovalStatus( nursery.getApprovalStatus() );
+        nurseryResponseDto.setLogoUrl( nursery.getLogoUrl() );
+        nurseryResponseDto.setCreatedAt( nursery.getCreatedAt() );
+        nurseryResponseDto.setUpdatedAt( nursery.getUpdatedAt() );
 
         return nurseryResponseDto;
     }
@@ -67,16 +67,16 @@ public class NurseryMapperImpl implements NurseryMapper {
 
         Nursery nursery = new Nursery();
 
+        nursery.setName( dto.getName() );
+        nursery.setDescription( dto.getDescription() );
         nursery.setAddress( dto.getAddress() );
         nursery.setCity( dto.getCity() );
+        nursery.setPostalCode( dto.getPostalCode() );
         nursery.setContactEmail( dto.getContactEmail() );
         nursery.setContactPhone( dto.getContactPhone() );
-        nursery.setDescription( dto.getDescription() );
-        nursery.setLogoUrl( dto.getLogoUrl() );
-        nursery.setName( dto.getName() );
-        nursery.setPostalCode( dto.getPostalCode() );
         nursery.setRating( dto.getRating() );
         nursery.setVerified( dto.isVerified() );
+        nursery.setLogoUrl( dto.getLogoUrl() );
 
         return nursery;
     }

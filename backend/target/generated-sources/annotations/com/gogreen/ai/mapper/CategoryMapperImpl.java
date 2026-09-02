@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-09-02T07:58:26+0530",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
+    date = "2026-09-02T08:01:45+0530",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 25.0.2 (Oracle Corporation)"
 )
 @Component
 public class CategoryMapperImpl implements CategoryMapper {
@@ -27,14 +27,14 @@ public class CategoryMapperImpl implements CategoryMapper {
 
         categoryResponseDto.setParentCategoryId( categoryParentCategoryId( category ) );
         categoryResponseDto.setParentCategoryName( categoryParentCategoryName( category ) );
-        categoryResponseDto.setActive( category.isActive() );
-        categoryResponseDto.setCreatedAt( category.getCreatedAt() );
-        categoryResponseDto.setDescription( category.getDescription() );
-        categoryResponseDto.setIcon( category.getIcon() );
         categoryResponseDto.setId( category.getId() );
-        categoryResponseDto.setImageUrl( category.getImageUrl() );
         categoryResponseDto.setName( category.getName() );
         categoryResponseDto.setSlug( category.getSlug() );
+        categoryResponseDto.setDescription( category.getDescription() );
+        categoryResponseDto.setIcon( category.getIcon() );
+        categoryResponseDto.setImageUrl( category.getImageUrl() );
+        categoryResponseDto.setActive( category.isActive() );
+        categoryResponseDto.setCreatedAt( category.getCreatedAt() );
         categoryResponseDto.setUpdatedAt( category.getUpdatedAt() );
 
         return categoryResponseDto;
@@ -62,10 +62,10 @@ public class CategoryMapperImpl implements CategoryMapper {
 
         Category category = new Category();
 
-        category.setDescription( dto.getDescription() );
-        category.setImageUrl( dto.getImageUrl() );
         category.setName( dto.getName() );
         category.setSlug( dto.getSlug() );
+        category.setDescription( dto.getDescription() );
+        category.setImageUrl( dto.getImageUrl() );
 
         return category;
     }

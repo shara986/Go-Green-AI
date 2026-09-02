@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-09-02T07:58:26+0530",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
+    date = "2026-09-02T08:01:45+0530",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 25.0.2 (Oracle Corporation)"
 )
 @Component
 public class PlantMapperImpl implements PlantMapper {
@@ -31,18 +31,18 @@ public class PlantMapperImpl implements PlantMapper {
         plantResponseDto.setNurseryName( plantNurseryName( plant ) );
         plantResponseDto.setCategoryId( plantCategoryId( plant ) );
         plantResponseDto.setCategoryName( plantCategoryName( plant ) );
-        plantResponseDto.setActive( plant.isActive() );
-        plantResponseDto.setCareInstructions( plant.getCareInstructions() );
-        plantResponseDto.setCreatedAt( plant.getCreatedAt() );
-        plantResponseDto.setDescription( plant.getDescription() );
         plantResponseDto.setId( plant.getId() );
-        plantResponseDto.setImageUrl( plant.getImageUrl() );
         plantResponseDto.setName( plant.getName() );
-        plantResponseDto.setPlantType( plant.getPlantType() );
-        plantResponseDto.setPrice( plant.getPrice() );
         plantResponseDto.setScientificName( plant.getScientificName() );
         plantResponseDto.setSku( plant.getSku() );
+        plantResponseDto.setDescription( plant.getDescription() );
+        plantResponseDto.setCareInstructions( plant.getCareInstructions() );
+        plantResponseDto.setPrice( plant.getPrice() );
         plantResponseDto.setStock( plant.getStock() );
+        plantResponseDto.setPlantType( plant.getPlantType() );
+        plantResponseDto.setImageUrl( plant.getImageUrl() );
+        plantResponseDto.setActive( plant.isActive() );
+        plantResponseDto.setCreatedAt( plant.getCreatedAt() );
         plantResponseDto.setUpdatedAt( plant.getUpdatedAt() );
 
         return plantResponseDto;
@@ -70,16 +70,16 @@ public class PlantMapperImpl implements PlantMapper {
 
         Plant plant = new Plant();
 
-        plant.setActive( dto.isActive() );
-        plant.setCareInstructions( dto.getCareInstructions() );
-        plant.setDescription( dto.getDescription() );
-        plant.setImageUrl( dto.getImageUrl() );
         plant.setName( dto.getName() );
-        plant.setPlantType( dto.getPlantType() );
-        plant.setPrice( dto.getPrice() );
         plant.setScientificName( dto.getScientificName() );
         plant.setSku( dto.getSku() );
+        plant.setDescription( dto.getDescription() );
+        plant.setCareInstructions( dto.getCareInstructions() );
+        plant.setPrice( dto.getPrice() );
         plant.setStock( dto.getStock() );
+        plant.setPlantType( dto.getPlantType() );
+        plant.setImageUrl( dto.getImageUrl() );
+        plant.setActive( dto.isActive() );
 
         return plant;
     }

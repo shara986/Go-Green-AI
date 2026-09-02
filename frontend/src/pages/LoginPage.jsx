@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiUser, FiLock, FiEye, FiEyeOff, FiAlertCircle, FiCheckCircle } from 'react-icons/fi';
+import { FiUser, FiLock, FiEye, FiEyeOff, FiAlertCircle } from 'react-icons/fi';
 import api from '../api/axiosInstance';
 import { useAuth } from '../context/AuthContext';
 import './LoginPage.css';
@@ -22,7 +22,7 @@ const LoginPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [validationError, setValidationError] = useState('');
 
-  const { login } = useAuth();
+  const { login, getDashboardPath } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -64,37 +64,19 @@ const LoginPage = () => {
         // Save auth data
         login(authData);
 
-        // Check if there was a target redirect path
+        // Check if there was a target redirect path (deep-link protection)
         const searchParams = new URLSearchParams(window.location.search);
         const redirectPath = searchParams.get('redirect');
 
-        // Role-based navigation
-        const userRoles = authData.user?.roles || [];
-        const hasRole = (role) =>
-          Array.isArray(userRoles)
-            ? userRoles.includes(role)
-            : userRoles instanceof Set
-            ? userRoles.has(role)
-            : false;
+        // Derive dashboard path from the API response directly (context hasn't re-rendered yet)
+        const roles = authData.user?.roles || [];
+        const hasRoleIn = (role) => Array.isArray(roles) ? roles.includes(role) : false;
+        let rolePath = '/';
+        if (hasRoleIn('ROLE_ADMIN')) rolePath = '/admin/dashboard';
+        else if (hasRoleIn('ROLE_NURSERY_OWNER')) rolePath = '/nursery/dashboard';
+        else if (hasRoleIn('ROLE_CUSTOMER')) rolePath = '/customer/dashboard';
 
-        const isUserAdmin = hasRole('ROLE_ADMIN');
-        const isNurseryOwner = hasRole('ROLE_NURSERY_OWNER');
-        const isCustomer = hasRole('ROLE_CUSTOMER');
-
-        let destination;
-        if (isUserAdmin) {
-          destination = '/admin/dashboard';
-        } else if (isNurseryOwner) {
-          destination = '/nursery/dashboard';
-        } else if (isCustomer) {
-          destination = '/customer/dashboard';
-        } else if (redirectPath) {
-          destination = redirectPath;
-        } else {
-          destination = '/';
-        }
-
-        navigate(destination);
+        navigate(redirectPath || rolePath);
       } else {
         setErrorMessage('Invalid response format from server.');
       }

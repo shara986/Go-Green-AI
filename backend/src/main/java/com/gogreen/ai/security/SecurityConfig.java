@@ -40,7 +40,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/auth/register/**", "/api/auth/login", "/api/auth/refresh-token", "/api/auth/forgot-password", "/api/auth/reset-password", "/swagger-ui/**", "/api-docs/**").permitAll()
+                        .requestMatchers("/api/auth/register/**", "/api/auth/login", "/api/auth/refresh-token", "/api/auth/logout", "/api/auth/forgot-password", "/api/auth/reset-password", "/swagger-ui/**", "/api-docs/**").permitAll()
                         .requestMatchers("/api/users/me", "/api/users/change-password").authenticated()
                         .anyRequest().authenticated()
                 )

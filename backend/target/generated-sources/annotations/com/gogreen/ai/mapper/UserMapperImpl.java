@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-09-02T07:58:26+0530",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.46.100.v20260624-0231, environment: Java 21.0.11 (Eclipse Adoptium)"
+    date = "2026-09-02T08:01:45+0530",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 25.0.2 (Oracle Corporation)"
 )
 @Component
 public class UserMapperImpl implements UserMapper {
@@ -25,16 +25,16 @@ public class UserMapperImpl implements UserMapper {
         UserResponseDto userResponseDto = new UserResponseDto();
 
         userResponseDto.setRoles( rolesToNames( user.getRoles() ) );
-        userResponseDto.setApprovalStatus( user.getApprovalStatus() );
-        userResponseDto.setCreatedAt( user.getCreatedAt() );
-        userResponseDto.setDeleted( user.isDeleted() );
-        userResponseDto.setEmail( user.getEmail() );
-        userResponseDto.setEnabled( user.isEnabled() );
         userResponseDto.setId( user.getId() );
         userResponseDto.setName( user.getName() );
-        userResponseDto.setPhoneNumber( user.getPhoneNumber() );
-        userResponseDto.setUpdatedAt( user.getUpdatedAt() );
         userResponseDto.setUsername( user.getUsername() );
+        userResponseDto.setEmail( user.getEmail() );
+        userResponseDto.setPhoneNumber( user.getPhoneNumber() );
+        userResponseDto.setEnabled( user.isEnabled() );
+        userResponseDto.setApprovalStatus( user.getApprovalStatus() );
+        userResponseDto.setDeleted( user.isDeleted() );
+        userResponseDto.setCreatedAt( user.getCreatedAt() );
+        userResponseDto.setUpdatedAt( user.getUpdatedAt() );
 
         return userResponseDto;
     }
@@ -61,12 +61,12 @@ public class UserMapperImpl implements UserMapper {
 
         User user = new User();
 
-        user.setEmail( dto.getEmail() );
-        user.setEnabled( dto.isEnabled() );
         user.setName( dto.getName() );
+        user.setUsername( dto.getUsername() );
+        user.setEmail( dto.getEmail() );
         user.setPassword( dto.getPassword() );
         user.setPhoneNumber( dto.getPhoneNumber() );
-        user.setUsername( dto.getUsername() );
+        user.setEnabled( dto.isEnabled() );
 
         return user;
     }

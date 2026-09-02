@@ -1,26 +1,29 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, { createContext, useState, useContext, useCallback } from 'react';
+import api from '../api/axiosInstance';
 
 const AuthContext = createContext(null);
 
-export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState(() => {
-    try {
-      const storedToken = localStorage.getItem('accessToken');
-      const storedUser = localStorage.getItem('user');
-      const storedAuth = localStorage.getItem('auth');
-      
-      if (storedAuth) {
-        return JSON.parse(storedAuth);
-      } else if (storedToken && storedUser) {
-        return { accessToken: storedToken, user: JSON.parse(storedUser) };
-      }
-    } catch (e) {
-      console.error('Failed to parse auth state from localStorage', e);
-    }
-    return { accessToken: null, user: null, refreshToken: null };
-  });
+const loadInitialAuth = () => {
+  try {
+    const storedAuth = localStorage.getItem('auth');
+    if (storedAuth) return JSON.parse(storedAuth);
 
-  const login = (data) => {
+    const storedToken = localStorage.getItem('accessToken');
+    const storedUser = localStorage.getItem('user');
+    if (storedToken && storedUser) {
+      return { accessToken: storedToken, user: JSON.parse(storedUser), refreshToken: localStorage.getItem('refreshToken') };
+    }
+  } catch (e) {
+    console.error('Failed to parse auth state from localStorage', e);
+  }
+  return { accessToken: null, user: null, refreshToken: null };
+};
+
+export const AuthProvider = ({ children }) => {
+  const [auth, setAuth] = useState(loadInitialAuth);
+
+  // ── Login: persist tokens and user ────────────────────────────────────────
+  const login = useCallback((data) => {
     // data: { accessToken, refreshToken, tokenType, expiresIn, user }
     const newAuth = {
       accessToken: data.accessToken,
@@ -29,26 +32,29 @@ export const AuthProvider = ({ children }) => {
     };
 
     setAuth(newAuth);
-    if (data.accessToken) {
-      localStorage.setItem('accessToken', data.accessToken);
-    }
-    if (data.refreshToken) {
-      localStorage.setItem('refreshToken', data.refreshToken);
-    }
-    if (data.user) {
-      localStorage.setItem('user', JSON.stringify(data.user));
-    }
+    localStorage.setItem('accessToken', data.accessToken || '');
+    if (data.refreshToken) localStorage.setItem('refreshToken', data.refreshToken);
+    if (data.user) localStorage.setItem('user', JSON.stringify(data.user));
     localStorage.setItem('auth', JSON.stringify(newAuth));
-  };
+  }, []);
 
-  const logout = () => {
-    setAuth({ accessToken: null, refreshToken: null, user: null });
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('user');
-    localStorage.removeItem('auth');
-  };
+  // ── Logout: tell the backend first, then clear local state ────────────────
+  const logout = useCallback(async () => {
+    try {
+      // Backend invalidates the refresh token record
+      await api.post('/auth/logout');
+    } catch (_) {
+      // Best-effort — always clear local state even if the call fails
+    } finally {
+      setAuth({ accessToken: null, refreshToken: null, user: null });
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('user');
+      localStorage.removeItem('auth');
+    }
+  }, []);
 
+  // ── Derived state ─────────────────────────────────────────────────────────
   const isAuthenticated = Boolean(auth.accessToken);
   const userRoles = auth.user?.roles || [];
 
@@ -63,11 +69,24 @@ export const AuthProvider = ({ children }) => {
   const isNurseryOwner = hasRole('ROLE_NURSERY_OWNER');
   const isCustomer = hasRole('ROLE_CUSTOMER');
 
-  const getDashboardPath = () => {
+  // Single source of truth for role-based dashboard path
+  const getDashboardPath = useCallback(() => {
     if (isAdmin) return '/admin/dashboard';
     if (isNurseryOwner) return '/nursery/dashboard';
-    return '/customer/dashboard';
-  };
+    if (isCustomer) return '/customer/dashboard';
+    return '/';
+  }, [isAdmin, isNurseryOwner, isCustomer]);
+
+  // Helper used by the axios interceptor (avoids circular import)
+  const updateTokens = useCallback((newAccessToken, newRefreshToken) => {
+    setAuth((prev) => {
+      const updated = { ...prev, accessToken: newAccessToken, refreshToken: newRefreshToken ?? prev.refreshToken };
+      localStorage.setItem('auth', JSON.stringify(updated));
+      return updated;
+    });
+    localStorage.setItem('accessToken', newAccessToken);
+    if (newRefreshToken) localStorage.setItem('refreshToken', newRefreshToken);
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -80,6 +99,7 @@ export const AuthProvider = ({ children }) => {
         isNurseryOwner,
         isCustomer,
         getDashboardPath,
+        updateTokens,
       }}
     >
       {children}
@@ -88,4 +108,3 @@ export const AuthProvider = ({ children }) => {
 };
 
 export const useAuth = () => useContext(AuthContext);
-
